@@ -1,0 +1,42 @@
+#     2. layout
+##    dark theme 적용하기
+[1. settings](./1_settings.md)에 `gatsby-emotion-dark-mode` 대한 설치 내용을 기록했습니다. 설치할 당시 기준으로 다운로드 수가 11밖에 안 돼서 의심스럽긴 하지만, theme 변수를 useContext로 전달해주기 때문에 css in js를 쓰는 stack에서는 이 plugin을 쓸 수 밖에 없습니다. 가장 많이 쓰는 theme plugin인 `gatsby-plugin-dark-mode`은 `body` 태그의 클래스명을 `light`과 `dark`로 바꿔주는 방식이기 때문에 css in js에서는 사용하기가 까다롭습니다.
+
+##    emotion 사용하기
+javascript를 쓸 때는 `emotion.js`에서 이런 코드가 가능했습니다.
+```javascript
+const Component = styled.div`
+  color: ${props => props.color};
+`
+```
+
+그런데 typescript에서는 이런 코드가 안 먹힌다. 애초에 `css` tagged template 함수의 인자 type에 함수가 존재하지 않아서 함수를 내려보내는 순간 에러가 납니다. (물론 에러를 무시하고 함수로 내려보내도 작동은 해요. 대신 정말 tslint가 미친듯이 울리죠.) 따라서 컴포넌트에 직접 props를 주입하는 방식이 아니라 외부 목록을 바로 가져오는 방식이 되어야 합니다.
+
+```typescript
+const color = "color"
+const Component = styled.div`
+  color: ${color};
+`
+```
+
+Javascript를 사용할 때에는 React Component 밖에서 styled Component를 정의해도 됐지만, 만약 RC 내의 변수를 사용해야 한다면 얄짤없이 RC 안에 SC를 정의해야 합니다. 이게 성능에 어떤 영향을 미칠지는 잘 모르겠지만, 미적으로는 보기가 좋지 않네요...
+
+##    design system 적용하기
+design system이라고 해봐야 거창한 것 없습니다. 원래 storybook을 사용하려고 했는데, 아직 storybook에 익숙하지 않아서 추가로 학습하기가 부담스러웠습니다. 여기서 말하는 design system은 그냥 재사용 가능한 디자인 컴포넌트들을 만든다고 보면 됩니다.
+
+###   색상
+테마 컬러를 제외하면 거의 대부분 open color를 사용합니다. 그리고 웹 개발 블로그답게(?) dark mode의 색상은 vs code의 default dark theme을 차용하였습니다.
+
+###   글꼴
+vscode에서는 Consolas를 사용하고 있지만 Consolas는 한글을 지원하지 않기 때문에 vs code에서 한글은 굴림체로 출력됩니다.
+
+##    레이아웃 디자인
+어떤 디자인을 해야 좋을까는 항상 저를 고민하게 만듭니다.
+
+
+##   에러 노트
+###   Type '{ children: string; css: SerializedStyles; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'. Property 'css' does not exist on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
+
+[emotion-typescript](https://emotion.sh/docs/typescript)에서 해결방법을 찾았다. 굳이 `tsconfig.json`을 만들 필요 없이 `@emotion/react`에서 `jsx`를 import한 다음 jsx pragma를 스크립트 최상단에 기재하면 에러가 나지 않는다.
+
+###   gatsby emotion에서 지금 transition 시간 지연이 적용되지 않는 버그가 있다.

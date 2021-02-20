@@ -150,7 +150,32 @@ module.exports = {
 };
 ```
 
-이렇게 초기 설정은 끝났습니다.
+
+##      이렇게 초기 설정은 끝났습니다.
 
 ##      gatsby develop
 gatsby HMR dev 서버는 다음 명령어로 동작할 수 있습니다. 참고로 `gatsby-source-filesystem`에서 `/posts` 디렉토리를 명시해놨기 때문에 `/src` 하위에  `/posts`를 생성해야 한다.
+
+`gatsby develop`과 `npm run develop`
+
+##      [gatsby-emotion-dark-mode](https://www.gatsbyjs.com/plugins/gatsby-emotion-dark-mode/?=Gatsby%20Emotion%20Dark%20Mode/)
+다음 명령어를 실행합니다.
+```sh
+npm install gatsby-emotion-dark-mode
+```
+
+```javascript
+// gatsby-config.js
+module.exports = {
+  ...
+  plugins: [
+    ...
+    {
+      resolve: `gatsby-emotion-dark-mode`,
+    },
+  ],
+};
+```
+
+##    기타 세팅(또는 모듈)
+*     react-icons
