@@ -179,3 +179,4 @@ module.exports = {
 
 ##    기타 세팅(또는 모듈)
 *     react-icons
+*     gatsby-plugin-sass

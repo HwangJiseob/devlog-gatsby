@@ -110,7 +110,7 @@ export const openColor = {
   red9: '#c92a2a',
 }
 
-export const vscode_dark = {
+export const vscodeDark = {
   background: "#1e1e1e",
   "activityBarBadge.background": "#007acc",
   "editor.background": "#1e1e1e",

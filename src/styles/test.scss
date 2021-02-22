@@ -5,7 +5,7 @@
   label {
     display: flex;
     align-items: center;
-    transition: all ease 5s;
+    transition: all ease 0.3s;
     justify-content: space-around;
     width: 60px;
     height: 30px;
@@ -14,7 +14,7 @@
     box-sizing: border-box;
     &::after {
       content: "";
-      transition: all ease 5s;
+      transition: all ease 0.3s;
       position: absolute;
       transform: translateX(-15px);
       height: 30px;
@@ -24,7 +24,7 @@
     }
   }
   input:checked + label:after {
-    transition: all ease 5s;
+    transition: all ease 0.3s;
     transform: translateX(15px);
   }
 
