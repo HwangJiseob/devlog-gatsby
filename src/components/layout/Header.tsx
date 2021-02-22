@@ -42,6 +42,9 @@ export const Header = () => {
           Hwang Jiseob
         </Logo>
         <nav css={nav}>
+          About
+          Post
+          Portfolio
           <ThemeToggle />
         </nav>
       </Container>
