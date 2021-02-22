@@ -3,6 +3,7 @@ export const color = {
 }
 
 export const layout = {
+  mobile_768px: "@media screen and (max-width: 768px)",
   header: {
     pc_height: "60px",
     mobile_height: "60px"
