@@ -2,7 +2,6 @@
 import { useContext, useMemo, useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { jsx, css } from '@emotion/react'
-import { ThemeManagerContext } from 'gatsby-emotion-dark-mode';
 
 import { layout, openColor } from '../../libs/config'
 import { ThemeToggle } from './ThemeToggle'
@@ -12,11 +11,11 @@ const { main, header } = layout
 const { gray5 } = openColor
 
 export const Header = () => {
-  let {isDark, toggleDark} = useContext(ThemeManagerContext)
 
   const Wrapper = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     height: ${header.pc_height};
   `
@@ -26,6 +25,7 @@ export const Header = () => {
     width: 100%;
     max-width: ${main.max_width};
     padding: 5px 10px;
+    transition: all ease 2s;
   `
 
   const Logo = styled.div`
@@ -44,7 +44,6 @@ export const Header = () => {
         <nav css={nav}>
           <ThemeToggle />
         </nav>
-
       </Container>
     </Wrapper>
   )

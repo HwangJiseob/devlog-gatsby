@@ -1,6 +1,9 @@
 #     2. layout
 ##    dark theme 적용하기
-[1. settings](./1_settings.md)에 `gatsby-emotion-dark-mode` 대한 설치 내용을 기록했습니다. 설치할 당시 기준으로 다운로드 수가 11밖에 안 돼서 의심스럽긴 하지만, theme 변수를 useContext로 전달해주기 때문에 css in js를 쓰는 stack에서는 이 plugin을 쓸 수 밖에 없습니다. 가장 많이 쓰는 theme plugin인 `gatsby-plugin-dark-mode`은 `body` 태그의 클래스명을 `light`과 `dark`로 바꿔주는 방식이기 때문에 css in js에서는 사용하기가 까다롭습니다.
+[1. settings](./1_settings.md)에 `gatsby-emotion-dark-mode` 대한 설치 내용을 기록했습니다. 설치할 당시 기준으로 다운로드 수가 11밖에 안 돼서 의심스럽긴 하지만, theme 변수를 useContext로 전달해주기 때문에 css in js를 쓰는 stack에서는 이 plugin을 쓰는 게 편하다고 생각합니다.
+
+처음에는 편했지만, 문제는 테마 변경에 따른 transition이 먹히지 않았습니다. 이틀 동안 사투를 벌인 끝에 결국 `gatsby-emotion-dark-mode`를 포기했습니다. 우선 `gatsby-emotion-dark-mode`는 React Context 기반으로 context 변수의 동기화를 위해 Mount되어 있는 모든 컴포넌트들의 rerendering을 강제합니다. 이 plugin이 잘못되었다는 것이 아니라, 애초에 컴포넌트에 context 변수를 동기화시키리면 리렌더링을 해야 하고 그렇게 되면 CSS transition syntax는 결국 사용할 수 없습니다. `react-transition-group`을 사용하더라도 결국 컴포넌트 자체가 다시 렌더링되기 때문에 자연스러운 테마 변경은 거의 불가능합니다.
+따라서 `gatsby-plugin-dark-mode`를 사용하여, emotion의 `Global` 스타일 컴포넌트에서 필요한 부분만 CSS를 제어하기로 결정했습니다.
 
 ##    emotion 사용하기
 javascript를 쓸 때는 `emotion.js`에서 이런 코드가 가능했습니다.
@@ -34,9 +37,10 @@ vscode에서는 Consolas를 사용하고 있지만 Consolas는 한글을 지원�
 어떤 디자인을 해야 좋을까는 항상 저를 고민하게 만듭니다.
 
 
+
 ##   에러 노트
 ###   Type '{ children: string; css: SerializedStyles; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'. Property 'css' does not exist on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
 
 [emotion-typescript](https://emotion.sh/docs/typescript)에서 해결방법을 찾았다. 굳이 `tsconfig.json`을 만들 필요 없이 `@emotion/react`에서 `jsx`를 import한 다음 jsx pragma를 스크립트 최상단에 기재하면 에러가 나지 않는다.
 
-###   gatsby emotion에서 지금 transition 시간 지연이 적용되지 않는 버그가 있다.
+###   gatsby emotion에서 지금 transition 시간 지연이 적용되지 않는 버그가 있습니다.

@@ -16,6 +16,10 @@ export const layout = {
   }
 }
 
+export const duration = {
+  themeDuration: "0.4s"
+}
+
 export const openColor = {
   "white": "#ffffff",
   "black": "#000000",

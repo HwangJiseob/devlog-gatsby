@@ -48,7 +48,7 @@ module.exports = {
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-emotion-dark-mode`,
-    `gatsby-plugin-sass`
+    `gatsby-plugin-sass`,
+    'gatsby-plugin-dark-mode'
   ],
 };
