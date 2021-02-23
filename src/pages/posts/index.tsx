@@ -1,11 +1,12 @@
+import React from 'react'
 import { Layout } from '../../components/layout/Layout'
 
-const Portfolio = () => {
+const Posts = () => {
   return (
     <Layout>
-      호옹이
+      Posts
     </Layout>
   )
 }
 
-export default Portfolio
+export default Posts

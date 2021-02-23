@@ -12,7 +12,7 @@ const { main, header, mobile_768px } = layout
 const { gray5 } = openColor
 const items = [
   { name: "About", path: "/about"},
-  { name: "Portfolio", path: "/portfolio" },
+  { name: "Works", path: "/works" },
   { name: "Posts", path: "/posts"},
   { name: "Github", path: "https://github.com/HwangJiseob"}
 ]
