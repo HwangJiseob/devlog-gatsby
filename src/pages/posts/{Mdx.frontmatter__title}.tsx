@@ -7,6 +7,7 @@ import styled from '@emotion/styled'
 import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'
 import { layout } from '../../libs/config'
+import "../../styles/gist.css"
 
 const post_width = layout.posts.max_width
 

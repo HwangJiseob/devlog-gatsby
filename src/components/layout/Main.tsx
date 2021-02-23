@@ -16,6 +16,7 @@ export const Main = ({ children }) => {
   `
   const Container = styled.main`
     width: 100%;
+    box-sizing: border-box;
     padding: 5px 10px;
     max-width: ${main.max_width};
   `

@@ -7,8 +7,14 @@ module.exports = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
+          'gatsby-remark-katex',
           {
-            resolve: 'gatsby-remark-katex',
+            resolve: 'gatsby-remark-embed-gist',
+            options: {
+              gistDefaultCssInclude: true,
+              gistCssPreload: true,
+              githubCssUrlAddress: "https://github.githubassets.com/assets/gist-embed-b3b573358bfc66d89e1e95dbf8319c09.css"
+            }
           }
         ],
         extensions: [".mdx", ".md"]

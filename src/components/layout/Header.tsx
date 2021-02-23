@@ -107,7 +107,6 @@ const nav = css`
     
     ${mobile_768px}{
       position: static;
-
     }
   }
 
@@ -115,6 +114,7 @@ const nav = css`
     ul {
     left: 100%;
     transition: all ease-out 0.5s;
+    z-index: 10;
     }
     ul[class*="click"]{
       left: 0;
