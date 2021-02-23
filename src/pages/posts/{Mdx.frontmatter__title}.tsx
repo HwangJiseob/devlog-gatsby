@@ -5,6 +5,10 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import styled from '@emotion/styled'
 
 import { Layout } from '../../components/layout/Layout'
+import { components as defaultComponents } from '../../components/mdx/default'
+import { layout } from '../../libs/config'
+
+const post_width = layout.posts.max_width
 
 const Post = (props) => {
   const { mdx } = useStaticQuery(graphql`
@@ -23,7 +27,7 @@ const Post = (props) => {
       <PostWrapper>
         <PostContainer>
           <div>호옹이</div>
-          <MDXProvider components={components}>
+          <MDXProvider components={defaultComponents}>
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </MDXProvider>
         </PostContainer>
@@ -41,25 +45,8 @@ const PostWrapper = styled.div`
 const PostContainer = styled.div`
   width: 100%;
   padding: 5px 10px;
-  max-width: 720px;
+  max-width: ${post_width};
 `
-
-const Fuck = props => <pre style={{ color: "red"}} {...props}/>
-
-const Suck = ({children, props}) => {
-  return (
-    <div style={{color: "green"}}>
-      <div>react component</div>
-      {children}
-    </div>
-  )
-}
-
-
-const components = {
-  h2:Fuck,
-  Test:Suck
-}
 
 
 

@@ -14,6 +14,9 @@ export const layout = {
   footer: {
     pc_height: "150px",
     mobile_height: "30px"  
+  },
+  posts: {
+    max_width: "720px"
   }
 }
 
