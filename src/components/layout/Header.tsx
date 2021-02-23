@@ -3,17 +3,18 @@ import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import { jsx, css } from '@emotion/react'
 import { IoMenu } from 'react-icons/io5'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 
-import { layout, openColor } from '../../libs/config'
+import { layout, openColor, nightSky } from '../../libs/config'
 import { ThemeToggle } from './ThemeToggle'
 
 const { main, header, mobile_768px } = layout
 const { gray5 } = openColor
 const items = [
-  { name: "Portfolio", link: "/portfolio" },
-  { name: "Posts", link: "/posts"},
-  { name: "Github", link: "https://github.com/HwangJiseob"}
+  { name: "About", path: "/about"},
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Posts", path: "/posts"},
+  { name: "Github", path: "https://github.com/HwangJiseob"}
 ]
 
 export const Header = () => {
@@ -36,9 +37,9 @@ export const Header = () => {
   }, [])
 
   return (
-    <Wrapper>
+    <Wrapper className="header">
       <Container>
-        <Logo>
+        <Logo onClick={()=>{navigate("/")}}>
           Hwang Jiseob
         </Logo>
         <nav css={nav}>
@@ -50,7 +51,7 @@ export const Header = () => {
               <li key={key}>
                 <Link
                   css={menu_item}
-                  to={item.link}
+                  to={item.path}
                 >
                   {item.name}
                 </Link>
@@ -87,6 +88,9 @@ const Container = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
 `
 
 const nav = css`
@@ -122,15 +126,17 @@ const more_menu = css`
   all: unset;
   cursor: pointer;
   height: 100%;
+  transition: all ease 0.5s;
   &:hover {
-    color: blue;
+    transition: all ease 0.5s;
+    color: ${nightSky.St_Patrick_Blue};
   }
 `
 
 const more_featrues = css`
   position: absolute;
-  right: 10vw;
-  top: calc(${header.pc_height} / 3 * 2);
+  right: max(5px, calc((100vw - ${main.max_width})/2));
+  top: calc((${header.pc_height} / 3) * 2);
   visibility: hidden;
   opacity: 0;
   transition: all ease-out 0.5s;
@@ -143,9 +149,9 @@ const more_featrues = css`
 
 const menu_items = css`
   display: flex;
-  margin: 0 10px 0 0;
+  margin: 0 20px 0 0;
   padding: 0;
-  gap: 10px;
+  gap: 20px;
   /* justify-content: space-around; */
   align-items: center;
   list-style: none;
@@ -165,8 +171,10 @@ const menu_items = css`
 const menu_item = css`
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: inherit;
+  transition: all ease 0.5s;
   &:hover {
-    color: blue;
+    transition: all ease 0.5s;
+    color: ${nightSky.St_Patrick_Blue};
   }
 `

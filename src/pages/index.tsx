@@ -16,12 +16,12 @@ const IndexPage = () => {
   `
   return (
     <Layout>
-      <main>
+      <div>
       index
       <div>
         호옹이
       </div>
-    </main>
+    </div>
     </Layout>
     
   )

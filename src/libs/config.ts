@@ -12,7 +12,7 @@ export const layout = {
     max_width: "1200px"
   },
   footer: {
-    pc_height: "200px",
+    pc_height: "150px",
     mobile_height: "30px"  
   }
 }
@@ -113,6 +113,15 @@ export const openColor = {
   red7: '#f03e3e',
   red8: '#e03131',
   red9: '#c92a2a',
+}
+
+export const nightSky = {
+  ChineseViolet : "#855988",
+  DarkLavender : "#6B4984",
+  Regalia : "#483475",
+  St_Patrick_Blue : "#2B2F77",
+  Space_Cadet : "#141852",
+  Cetacean_Blue : "#070B34"
 }
 
 export const vscodeDark = {

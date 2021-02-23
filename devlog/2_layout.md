@@ -28,7 +28,9 @@ Javascript를 사용할 때에는 React Component 밖에서 styled Component를 
 design system이라고 해봐야 거창한 것 없습니다. 원래 storybook을 사용하려고 했는데, 아직 storybook에 익숙하지 않아서 추가로 학습하기가 부담스러웠습니다. 여기서 말하는 design system은 그냥 재사용 가능한 디자인 컴포넌트들을 만든다고 보면 됩니다.
 
 ###   색상
-테마 컬러를 제외하면 거의 대부분 open color를 사용합니다. 그리고 웹 개발 블로그답게(?) dark mode의 색상은 vs code의 default dark theme을 차용하였습니다.
+테마 컬러를 제외하면 거의 대부분 open color를 사용합니다. 그리고 웹 개발 블로그답게(?) vsCode의 default dark mode 색상을 쓰려고 했으나 막상 적용해보니 별로 예쁘지 않아서 dark mode의 색상은 인터넷에 있는 nightSky 색상을 사용했습니다.
+
+또한 테마를 적용할 때 emotion의 `Global`을 사용하니 페이지를 이동할 때마다 css 효과가 다시 적용되는 부작용이 나타났습니다. CSS-in-JS 특성상 이런 식의 일이 잦기 때문에 바로 scss 파일을 적용하였습니다.
 
 ###   글꼴
 vscode에서는 Consolas를 사용하고 있지만 Consolas는 한글을 지원하지 않기 때문에 vs code에서 한글은 굴림체로 출력됩니다.

@@ -6,8 +6,9 @@ import { ThemeManagerContext } from 'gatsby-emotion-dark-mode';
 import { IoSunny, IoMoon } from 'react-icons/io5'
 import { ThemeToggler } from 'gatsby-plugin-dark-mode'
 
-import { vscodeDark, openColor, duration, layout} from '../../libs/config'
+import { nightSky, vscodeDark, openColor, duration, layout} from '../../libs/config'
 
+const { Cetacean_Blue } = nightSky
 const { background } = vscodeDark
 const { gray1 } = openColor
 const { themeDuration } = duration
@@ -62,7 +63,7 @@ const ToggleContainer = styled.div`
     }
     input:checked + label{
       transition: all ease ${themeDuration};
-      background: #0c1145;
+      background: ${Cetacean_Blue};
     }
     input:checked + label:after {
       transition: all ease ${themeDuration};

@@ -14,7 +14,7 @@ export const Main = ({ children }) => {
     justify-content: center;
     width: 100%;
   `
-  const Container = styled.div`
+  const Container = styled.main`
     width: 100%;
     padding: 5px 10px;
     max-width: ${main.max_width};

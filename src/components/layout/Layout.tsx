@@ -5,6 +5,8 @@ import styled from '@emotion/styled'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { Main } from './Main'
+import { nightSky, openColor } from '../../libs/config'
+import "../../styles/layout.scss"
 
 export const Layout = ({ children }) => {
   const global = css`
@@ -12,14 +14,20 @@ export const Layout = ({ children }) => {
       margin: 0;
       padding: 0;
     }
-    /* body[class="dark"]{
-      background: yellow;
-      transition: all ease 0.4s;
+    body[class="dark"]{
+      color: ${openColor.gray1};
+      background-color: ${nightSky.Cetacean_Blue};
+      transition: color 0.5s, background-color 1s;
+      div[class*="header"]{
+        background: ${nightSky.ChineseViolet};
+        transition: all ease 1s;
+      }
     }
     body[class="light"]{
-      background: green;
-      transition: all ease 0.4s;
-    } */
+      color: black;
+      background-color: white;
+      transition: color 0.5s, background-color 1s;
+    }
   `
   return (
     <Wrapper>
