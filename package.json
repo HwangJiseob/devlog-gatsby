@@ -31,12 +31,16 @@
     "gatsby-remark-embed-gist": "^1.2.1",
     "gatsby-remark-katex": "^3.10.0",
     "gatsby-source-filesystem": "^2.11.0",
+    "gatsby-transformer-remark": "^2.16.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "katex": "^0.12.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
+    "rehype-katex": "^4.0.0",
+    "remark-html-katex": "^3.0.0",
+    "remark-math": "^4.0.0",
     "sass": "^1.32.8"
   }
 }

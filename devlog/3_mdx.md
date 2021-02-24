@@ -20,9 +20,16 @@ gist가 추가될 때 padding이 viewport를 벗어나는 문제를 `box-sizing`
 ```
 
 ###   katex
+katex를 mdx에 연동하는 것 역시 만만치 않았습니다. 처음에는 `remark-plugin-katex`를 썼는데 렌더링이 되지 않았습니다. 확인해보니 `remark-plugin-katex`가 mdxAST까지는 진입하지만 그 이후에 마크업을 전혀 하지 못했습니다. 이를 해결하려면 `remark-plugin-katex` 대신 `remark-math`와 `remark-html-katx`를 직접 `require()`로 import 해야 합니다. [출처](https://github.com/gatsbyjs/gatsby/issues/20538#issuecomment-721845436)에서는 `remark-math`의 버전을 3으로 downgrade하라고 하지만 2020-02-24 기준으로 4.0.0도 정상 작동합니다.
+
+mdx와 katex를 연동하면서 이렇게까지 mdx를 써야하나 자괴감을 많이 느꼈습니다...
 
 ###   codesandbox
 
 
 ##    내부 스타일링
 ###   Code highlight
+
+###   단 나누기
+
+###   슬라이드 포맷

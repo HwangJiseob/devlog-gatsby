@@ -207,3 +207,6 @@ module.exports = {
 *     react-icons
 *     gatsby-plugin-sass
 *     gatsby-plugin-dark-mode
+
+*     remark-math
+*     rehype-katex

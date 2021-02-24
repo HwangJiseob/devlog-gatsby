@@ -94,6 +94,16 @@ const Youtube = (props) => {
   }
 }
 
+const Math = ({children}) => {
+  return(
+    <div>
+      math
+      {children}
+    </div>
+  )
+}
+
 export const components = {
-  Youtube: Youtube
+  Youtube: Youtube,
+  katex: Math
 }
