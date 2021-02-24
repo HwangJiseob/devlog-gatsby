@@ -49,25 +49,32 @@ const isRatio = (ratio) => {
 }
 
 const Prism = ({children, className}) => {
+  const container = css`
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+  `
   const language = className.replace(/language-/, '') || ""
   return (
-    <Highlight {...defaultProps}
-      code={children}
-      language={language}
-      theme={vsDark}
-    >
-      {({className, style, tokens, getLineProps, getTokenProps}) => (
-        <pre className={className} style={{...style, padding: '20px'}}>
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({line, key: i})}>
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({token, key})} />
-              ))}
-            </div>
-          ))}
-        </pre>
-      )}
-    </Highlight>
+      <Highlight {...defaultProps}
+        code={children}
+        language={language}
+        theme={vsDark}
+      >
+        {({className, style, tokens, getLineProps, getTokenProps}) => (
+          <pre className={className} style={{...style, padding: '20px'}}
+            css={container}
+          >
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({line, key: i})}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({token, key})} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
   )
 }
 
