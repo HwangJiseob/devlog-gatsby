@@ -25,10 +25,14 @@ katex를 mdx에 연동하는 것 역시 만만치 않았습니다. 처음에는 
 mdx와 katex를 연동하면서 이렇게까지 mdx를 써야하나 자괴감을 많이 느꼈습니다...
 
 ###   codesandbox
-
+추후 연동 예정
 
 ##    내부 스타일링
 ###   Code highlight
+[공식문서](https://mdxjs.com/guides/syntax-highlighting),
+[Migrating from gatsby-remark-prismjs to prism-react-renderer](https://prince.dev/prism-react-renderer)
+
+테마까지 하고 싶으면 공식문서 대신 포스트를 참고하면 됩니다.
 
 ###   단 나누기
 

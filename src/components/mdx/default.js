@@ -1,10 +1,8 @@
 /** @jsx jsx */
 import { layout } from '../../libs/config'
 import { jsx, css } from '@emotion/react'
-
-interface MdxComponents {
-  h1: string
-}
+import Highlight, {defaultProps} from 'prism-react-renderer'
+import vsDark from 'prism-react-renderer/themes/vsDark';
 
 const post_width = layout.posts.max_width
 
@@ -48,6 +46,29 @@ const isRatio = (ratio) => {
   } else {
     return 1
   }
+}
+
+const Prism = ({children, className}) => {
+  const language = className.replace(/language-/, '') || ""
+  return (
+    <Highlight {...defaultProps}
+      code={children}
+      language={language}
+      theme={vsDark}
+    >
+      {({className, style, tokens, getLineProps, getTokenProps}) => (
+        <pre className={className} style={{...style, padding: '20px'}}>
+          {tokens.map((line, i) => (
+            <div key={i} {...getLineProps({line, key: i})}>
+              {line.map((token, key) => (
+                <span key={key} {...getTokenProps({token, key})} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  )
 }
 
 const Youtube = (props) => {
@@ -104,6 +125,7 @@ const Math = ({children}) => {
 }
 
 export const components = {
+  code: Prism,
   Youtube: Youtube,
   katex: Math
 }

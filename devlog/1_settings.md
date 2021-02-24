@@ -210,3 +210,4 @@ module.exports = {
 
 *     remark-math
 *     remark-html-katex
+*     prism-react-renderer
