@@ -28,7 +28,7 @@ const Post = (props) => {
     <Layout>
       <PostWrapper>
         <PostContainer>
-          <div>호옹이</div>
+          <PostTitle>{mdx.frontmatter.title}</PostTitle>
           <MDXProvider components={defaultComponents}>
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </MDXProvider>
@@ -50,6 +50,9 @@ const PostContainer = styled.div`
   max-width: ${post_width};
 `
 
+const PostTitle = styled.h1`
+
+`
 
 
 export default Post

@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { layout } from '../../libs/config'
 import { jsx, css } from '@emotion/react'
+import styled from '@emotion/styled'
 import Highlight, {defaultProps} from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark';
 
@@ -128,17 +129,29 @@ const Youtube = (props) => {
   }
 }
 
-const Math = ({children}) => {
+const Columns = ({ children, vr }) => {
+  const isVR = vr ? true : false
+  const columns = children.filter(child => {
+    return child?.props?.mdxType === "Column"
+  })
+  const container = css`
+    display: grid;
+    margin: 20px 0;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 10px;
+  `
   return(
-    <div>
-      math
-      {children}
+    <div css={container}>
+      {columns}
     </div>
   )
 }
+const Column = styled.div`
+`
 
 export const components = {
   code: Prism,
   Youtube: Youtube,
-  katex: Math
+  Columns: Columns,
+  Column: Column
 }
