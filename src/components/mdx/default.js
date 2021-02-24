@@ -49,13 +49,18 @@ const isRatio = (ratio) => {
 }
 
 const Prism = ({children, className}) => {
+  const wrapper = css`
+    overflow-x: auto;
+  `
   const container = css`
-    width: 100%;
+    min-width: 100%;
+    float: left;
     box-sizing: border-box;
     overflow-x: auto;
   `
   const language = className.replace(/language-/, '') || ""
   return (
+    <div css={wrapper}>
       <Highlight {...defaultProps}
         code={children}
         language={language}
@@ -75,6 +80,7 @@ const Prism = ({children, className}) => {
           </pre>
         )}
       </Highlight>
+    </div>
   )
 }
 
