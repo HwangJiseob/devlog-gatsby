@@ -209,4 +209,4 @@ module.exports = {
 *     gatsby-plugin-dark-mode
 
 *     remark-math
-*     rehype-katex
+*     remark-html-katex
