@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import styled from '@emotion/styled'
+import "katex/dist/katex.min.css"
 
 import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'

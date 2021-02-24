@@ -12,19 +12,18 @@ module.exports = {
         ],
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-katex`,
+            options: {
+              // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
+              strict: `ignore`
+            }
+          },
+          {
             resolve: 'gatsby-remark-embed-gist',
             options: {
               gistDefaultCssInclude: true,
               // gistCssPreload: true,
               gistCssUrlAddress: "https://github.githubassets.com/assets/gist-embed-b3b573358bfc66d89e1e95dbf8319c09.css"
-            }
-          },
-          {
-            resolve: "gatsby-remark-katex",
-            options: {
-              strict: `ignore`,
-              // displayMode: true,
-              // output: `htmlAndMathml`
             }
           }
         ],

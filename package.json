@@ -41,7 +41,7 @@
     "react-icons": "^4.2.0",
     "rehype-katex": "^4.0.0",
     "remark-html-katex": "^3.0.0",
-    "remark-math": "^4.0.0",
+    "remark-math": "^3.0.1",
     "sass": "^1.32.8"
   }
 }
