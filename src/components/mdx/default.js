@@ -113,11 +113,15 @@ const Youtube = (props) => {
   const src = isWatchSrc(url)
   // youtube embed url이 아니어도 연동이 가능하도록
   // 일반 url을 embed url로 바꿔주는 코드를 작성하였습니다.
-
+  const wrapper = css`
+    width: 100%;
+    display: grid;
+    place-items: center;
+  `
   const container = css`
+    width: 100%;
     max-width: calc(${post_width} * ${ratio});
   `
-
   const youtube = css`
     position: relative;
     padding-bottom: 56.25%;
@@ -134,15 +138,17 @@ const Youtube = (props) => {
   `
   if(src){
     return (
-      <div css={container}>
-        <div css={youtube}>
-          <iframe
-            css={iframe}
-            src={src}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+      <div css={wrapper}>
+        <div css={container}>
+          <div css={youtube}>
+            <iframe
+              css={iframe}
+              src={src}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
       </div>
     )
