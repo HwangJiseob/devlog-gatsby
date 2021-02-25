@@ -27,13 +27,13 @@ const Post = ({ pageContext }) => {
   )
 }
 
-const PostWrapper = styled.div`
+export const PostWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
 `
 
-const PostContainer = styled.div`
+export const PostContainer = styled.div`
   width: 100%;
   padding: 5px 10px;
   max-width: ${post_width};

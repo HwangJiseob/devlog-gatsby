@@ -1,7 +1,10 @@
 const path = require(`path`)
 const slugify = require('@sindresorhus/slugify');
 
+const { makePostPath } = './src/libs/makePostPath'
+
 exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
+  console.log(makePostPath)
   const config = getConfig()
   config.node = {
       fs: 'empty'
@@ -27,6 +30,7 @@ exports.createPages = ({ graphql, actions }) => {
             tags
             series
             date
+            description
           }
         }
       }
@@ -42,8 +46,8 @@ exports.createPages = ({ graphql, actions }) => {
       const { series, title } = node.frontmatter
       const sluggedTitlte = korean.test(title) ? title : slugify(title)
       const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
-      console.log(sluggedSeries)
       const path = series ? `posts/${sluggedSeries}/${sluggedTitlte}` : `posts/${sluggedTitlte}`
+      // const path = makePostPath(series, title
       createPage({
         // Path for this page — required
         path: path,
