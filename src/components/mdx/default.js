@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import React from 'react'
 import { layout } from '../../libs/config'
 import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
@@ -8,8 +9,21 @@ import Gist from 'super-react-gist'
 
 import { InlineMath, BlockMath } from 'react-katex';
 
+import micromark from 'micromark'
+import gfmSyntax from 'micromark-extension-gfm'
+import gfmHtml from 'micromark-extension-gfm/html'
+import mdxSyntax from 'micromark-extension-mdx'
+import jsxSyntax from 'micromark-extension-mdx-jsx'
+
+import unified from 'unified'
+import remarkParse from 'remark-parse'
+import remarkStringify from 'remark-stringify'
+
+import remarkMdx from 'remark-mdx'
+// import mdxAstToMdxHast from '@mdx-js/mdx/mdx-ast-to-mdx-hast'
 
 const post_width = layout.posts.max_width
+const max_width = layout.main.max_width
 
 const isWatchSrc = (url) => {
   const domain = "www.youtube.com"
@@ -154,9 +168,48 @@ const Columns = ({ children, vr }) => {
     </div>
   )
 }
-const Column = styled.div`
-`
 
+const transpileMDXorNot = (target) => {
+  if(!target?.type?.displayName){
+    console.log(target)
+    const result = micromark(target, {
+      extensions: [gfmSyntax()],
+      htmlExtensions: [gfmHtml]
+    })
+    return { __html: result }
+  } else {
+    return target
+  }
+}
+
+const Column = ({ children }) => {
+  console.log(children)
+  let result, results
+  if(Array.isArray(children)){
+    results = children.map(child => {
+      return transpileMDXorNot(child)
+    })
+  } else {
+    result = transpileMDXorNot(children)
+  }
+  console.log(result)
+  return(
+    <div>
+      {
+        result && result?.type?.displayName
+        ? <>{result}</>
+        : <div dangerouslySetInnerHTML={result} />
+      }
+      {
+        results && results.map(result => {
+          return result?.type?.displayName
+          ? <>{result}</>
+          : <div dangerouslySetInnerHTML={result} />
+        })
+      }
+    </div>
+  )
+}
 const Table = ({children}) => {
   const thead = children[0]?.props?.children?.props?.children?.length
   const container = css`
@@ -177,15 +230,6 @@ const Table = ({children}) => {
     </div>
   )
 }
-
-const GistContainer = (props) => {
-  return(
-    <div style={{ width: "100%"}}>
-      <Gist {...props} />
-    </div>
-  )
-}
-
 
 export const components = {
   code: Prism,

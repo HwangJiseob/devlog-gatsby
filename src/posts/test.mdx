@@ -29,7 +29,7 @@ const hello = (pram) => {if(param){ return param++ }}
 
 <Columns>
   <Column>
-  # test title
+    # test title
     <Code 
   language="javascript"
   script={`
@@ -39,7 +39,12 @@ const hello = (pram) => {if(param){ return param++ }}
 />
   </Column>
   <Column>
-    ## test title2
+    ## test title<div/>
+    ### 흐름<div/>
+    문단
+    <BlockMath>
+      a^2 + b^2
+    </BlockMath>
   </Column>
 </Columns>
 
@@ -57,5 +62,5 @@ a^2 + b^2 = c^2
 $$
 
 |    |
-| :---:        |    :---:   | :---: |
-| Header      | Title       |  행복 |
+| :---:        |    :---:   |
+| Header      | Title       |

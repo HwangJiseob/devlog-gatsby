@@ -33,6 +33,7 @@
     "gatsby-transformer-remark": "^2.16.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "katex": "^0.12.0",
+    "micromark-extension-mdx-jsx": "^0.3.2",
     "prism-react-renderer": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -41,8 +42,16 @@
     "react-katex": "^2.0.2",
     "remark-html-katex": "^3.0.0",
     "remark-math": "^3.0.1",
+    "remark-mdx": "^1.6.22",
     "sass": "^1.32.8",
     "super-react-gist": "^1.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "micromark": "^2.11.4",
+    "micromark-extension-gfm": "^0.3.2",
+    "micromark-extension-mdx": "^0.2.1",
+    "remark-parse": "^9.0.0",
+    "remark-stringify": "^9.0.1",
+    "unified": "^9.2.1"
+  }
 }
