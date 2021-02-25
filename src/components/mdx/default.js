@@ -6,6 +6,9 @@ import Highlight, {defaultProps} from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark';
 import Gist from 'super-react-gist'
 
+import { InlineMath, BlockMath } from 'react-katex';
+
+
 const post_width = layout.posts.max_width
 
 const isWatchSrc = (url) => {
@@ -64,7 +67,7 @@ const Prism = ({children, className}) => {
   return (
     <div css={wrapper}>
       <Highlight {...defaultProps}
-        code={children}
+        code={children.trim()}
         language={language}
         theme={vsDark}
       >
@@ -84,6 +87,10 @@ const Prism = ({children, className}) => {
       </Highlight>
     </div>
   )
+}
+
+const Code = ({ script, language }) => {
+  return <Prism className={language}>{script.trim()}</Prism>
 }
 
 const Youtube = (props) => {
@@ -152,7 +159,6 @@ const Column = styled.div`
 
 const Table = ({children}) => {
   const thead = children[0]?.props?.children?.props?.children?.length
-  console.log(thead)
   const container = css`
     width: auto;
     overflow-x: auto;
@@ -183,7 +189,12 @@ const GistContainer = (props) => {
 
 export const components = {
   code: Prism,
+  Code: Code,
   Youtube: Youtube,
-  Gist: (props)=>{ console.log(props);return <Gist {...props} />},
-  table: Table
+  Gist: Gist,
+  InlineMath: InlineMath, 
+  BlockMath: BlockMath,
+  Columns: Columns,
+  Column: Column,
+  table: Table,
 }

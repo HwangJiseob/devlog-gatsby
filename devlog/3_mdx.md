@@ -8,6 +8,10 @@ youtube 영상을 iframe에 연동하려면 embed url을 따로 써야하지만,
 추후에 유튜브 동영상 리스트처럼 썸네일만 표시하다가 마우스를 대면 영상이 일정 부분 재생되는 hover, 그리고 클릭하면 재생되면 효과를 구현해보고 싶습니다만, 나중에 여유가 되면 구현해볼 생각입니다.
 
 ###   gist
+####  migration from gatsby-remark-embed-gist to super-react-gist
+기존에 사용하던 `gatsby-remark-embed-gist`를 버리고 `super-react-gist`를 사용하기로 결정했습니다.
+
+####  gatsby-remark-embed-gist
 `gatsby-config.is`를 바꾸는 내용은 [1. settings](./1_settings.md)에 나와있습니다.
 remark가 아니라 mdx를 사용할 때 플러그인에서 css를 불러오지 못하는 버그가 있습니다. 따라서 우회적으로 플러그인 문서에 있는 css 파일을 import합니다. 단, 항상 import를 하게 되므로 성능은 무조건 하락합니다. dynamic import를 page Component 안에 하면 새로 고침 시 디자인이 적용되는데 시간이 걸려서 아예 전역 import를 하였습니다. 성능 하락을 방지하려면 gist 호출 syntax가 있는 post에만 아래 `link` 태그를 넣어줘야 하는데, 이걸 글 작성 때마다 넣어주는 건 너무 불편하므로 저는 전역으로 import하는 방법을 선택했습니다.
 
