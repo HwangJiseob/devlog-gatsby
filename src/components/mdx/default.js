@@ -4,6 +4,7 @@ import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Highlight, {defaultProps} from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark';
+import Gist from 'super-react-gist'
 
 const post_width = layout.posts.max_width
 
@@ -149,9 +150,40 @@ const Columns = ({ children, vr }) => {
 const Column = styled.div`
 `
 
+const Table = ({children}) => {
+  const thead = children[0]?.props?.children?.props?.children?.length
+  console.log(thead)
+  const container = css`
+    width: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+  `
+  const table = css`
+    table-layout: fixed;
+    width: 100%;
+  `
+  return (
+    <div css={container}>
+      <table css={table}>
+        {children}
+      </table>
+    </div>
+  )
+}
+
+const GistContainer = (props) => {
+  return(
+    <div style={{ width: "100%"}}>
+      <Gist {...props} />
+    </div>
+  )
+}
+
+
 export const components = {
   code: Prism,
   Youtube: Youtube,
-  Columns: Columns,
-  Column: Column
+  Gist: (props)=>{ console.log(props);return <Gist {...props} />},
+  table: Table
 }

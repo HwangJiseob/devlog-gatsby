@@ -37,6 +37,9 @@ mdx와 katex를 연동하면서 이렇게까지 mdx를 써야하나 자괴감을
 테마까지 하고 싶으면 공식문서 대신 포스트를 참고하면 됩니다.
 
 ###   단 나누기
-단을 컴포넌트로 나누면서 컴포넌트 안에서는 md를 비롯한 remark도 전부 먹히지 않는다는 것을 뒤늦게 깨달았다. 현재 gist는 `react-gist`, katex는 `react-katex`로 migration할 예정이다.
+단을 컴포넌트로 나누면서 컴포넌트 안에서는 md를 비롯한 remark도 전부 먹히지 않는다는 것을 뒤늦게 깨달았습니다. 현재 gist는 `react-gist`, katex는 `react-katex`로 migration할 예정입니다.
+`react-gist`는 스크롤바 임의로 붙는 문제 때문에 폐기하고 `super-react-gist`로 갈아탔습니다.
+
+하지만 이는 근본적인 해결책이 아닙니다. `Column` gist와 katex를 특정 컴포넌트로 대체한다면 결국 컴포넌트 안에 들어가는 children들을 모두 mdx 문법에 따라 html로 마크업해야 합니다. 하지만 직접 parsing 및 마크업 과정을 조작하는 건 매우 복잡하므로 children으로 들어오는 string을 `remark`를 통해 마크업한 다음, `dangerouslySetInnerHTML`으로 주입하는 방법이 그나마 현실적입니다. 하지만 이는 기존에 세팅한 렌더링 방법들을 재활용할 수 없으므로, Format에 대해서는  
 
 ###   슬라이드 포맷
