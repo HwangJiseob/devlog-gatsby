@@ -2,7 +2,6 @@
 title: test title
 date: 2020-02-23
 tags: ["test", "테스트"]
-seires: none
 description: test description
 ---
 
@@ -29,20 +28,19 @@ const hello = (pram) => {if(param){ return param++ }}
 
 <Columns>
   <Column>
-    # test title
+    <Youtube src="https://www.youtube.com/watch?v=Ta6ERXcsBYE" size="half" ratio="50" />
+  </Column>
+  <Column>
+    ## test title<div/>
+    ### 흐름<div/>
+    문단
     <Code 
   language="javascript"
   script={`
 const hello = (pram) => {if(param){ return param++ }}
 const hello = (pram) => {if(param){ return param++ }}
   `}
-/>
-  </Column>
-  <Column>
-    ## test title<div/>
-    <Youtube src="https://www.youtube.com/watch?v=Ta6ERXcsBYE" size="half" ratio="50" />
-    ### 흐름<div/>
-    문단
+    />
     <BlockMath>
       a^2 + b^2
     </BlockMath>
@@ -64,4 +62,4 @@ $$
 
 |    |
 | :---:        |    :---:   |
-| Header      | Title       |
+| <Gist  url='https://gist.github.com/GeorgeGkas/5f55a83909a3f5b766934ffe802d30df#file-start-js' />      | <Youtube src="https://www.youtube.com/watch?v=Ta6ERXcsBYE" size="half" ratio="100" /> |

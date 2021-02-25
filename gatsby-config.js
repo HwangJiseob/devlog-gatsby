@@ -4,6 +4,29 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "pages",
+        path: `./src/pages/`,
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "posts",
+        path: `./src/posts/`,
+      },
+      extensions: [".mdx", ".md"],
+      // __key: "posts",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: `./src/images/`,
+      }
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         remarkPlugins: [
@@ -30,29 +53,6 @@ module.exports = {
         labelFormat: `[local]`,
         cssPropOptimization: true,
       },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "pages",
-        path: "./src/pages/",
-      }
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "posts",
-        path: "./src/posts/",
-      },
-      extensions: [".mdx"],
-      __key: "posts",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "images",
-        path: "./src/images/",
-      }
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

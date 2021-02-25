@@ -11,25 +11,15 @@ import { layout } from '../../libs/config'
 
 const post_width = layout.posts.max_width
 
-const Post = (props) => {
-  const { mdx } = useStaticQuery(graphql`
-    query($id: String) {
-      mdx(id: { eq: $id }) {
-        body
-        frontmatter{
-          title
-          tags
-        }
-      }
-    }
-  `)
+const Post = ({ pageContext }) => {
+  // console.log(pageContext)
   return(
     <Layout>
       <PostWrapper>
         <PostContainer>
-          <PostTitle>{mdx.frontmatter.title}</PostTitle>
+          <PostTitle>{pageContext.frontmatter.title}</PostTitle>
           <MDXProvider components={defaultComponents}>
-            <MDXRenderer>{mdx.body}</MDXRenderer>
+            <MDXRenderer>{pageContext.body}</MDXRenderer>
           </MDXProvider>
         </PostContainer>
       </PostWrapper>
@@ -53,5 +43,6 @@ const PostTitle = styled.h1`
 
 `
 
-
 export default Post
+
+// mdx.frontmatter__url
