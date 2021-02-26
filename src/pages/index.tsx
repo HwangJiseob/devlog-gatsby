@@ -17,7 +17,6 @@ const IndexPage = () => {
     <Layout>
       사이트 정비 중
     </Layout>
-    
   )
 }
 

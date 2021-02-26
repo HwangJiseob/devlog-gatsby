@@ -12,15 +12,15 @@ import { InlineMath, BlockMath } from 'react-katex';
 import micromark from 'micromark'
 import gfmSyntax from 'micromark-extension-gfm'
 import gfmHtml from 'micromark-extension-gfm/html'
-import mdxSyntax from 'micromark-extension-mdx'
-import jsxSyntax from 'micromark-extension-mdx-jsx'
+// import mdxSyntax from 'micromark-extension-mdx'
+// import jsxSyntax from 'micromark-extension-mdx-jsx'
 
-import unified from 'unified'
-import remarkParse from 'remark-parse'
-import remarkStringify from 'remark-stringify'
+// import unified from 'unified'
+// import remarkParse from 'remark-parse'
+// import remarkStringify from 'remark-stringify'
 
-import remarkMdx from 'remark-mdx'
-// import mdxAstToMdxHast from '@mdx-js/mdx/mdx-ast-to-mdx-hast'
+// import remarkMdx from 'remark-mdx'
+// // import mdxAstToMdxHast from '@mdx-js/mdx/mdx-ast-to-mdx-hast'
 
 const post_width = layout.posts.max_width
 const max_width = layout.main.max_width
@@ -177,7 +177,6 @@ const Columns = ({ children, vr }) => {
 
 const transpileMDXorNot = (target) => {
   if(!target?.type?.displayName){
-    console.log(target)
     const result = micromark(target, {
       extensions: [gfmSyntax()],
       htmlExtensions: [gfmHtml]
@@ -189,7 +188,6 @@ const transpileMDXorNot = (target) => {
 }
 
 const Column = ({ children }) => {
-  console.log(children)
   let result, results
   if(Array.isArray(children)){
     results = children.map(child => {
@@ -198,7 +196,6 @@ const Column = ({ children }) => {
   } else {
     result = transpileMDXorNot(children)
   }
-  console.log(result)
   return(
     <div>
       {

@@ -12,9 +12,9 @@ const Posts = (props) => {
   // Search component로 옮겼다.
   return (
     <Layout>
-      <div>
+      <h1>
         Posts
-      </div>
+      </h1>
       <Search props={props} />
     </Layout>
   )

@@ -12,15 +12,19 @@ import { layout } from '../../libs/config'
 const post_width = layout.posts.max_width
 
 const Post = ({ pageContext }) => {
-  // console.log(pageContext)
+  const { node, previous, next } = pageContext
+  console.log(previous)
   return(
     <Layout>
       <PostWrapper>
         <PostContainer>
-          <PostTitle>{pageContext.frontmatter.title}</PostTitle>
+          <PostTitle>{node.frontmatter.title}</PostTitle>
           <MDXProvider components={defaultComponents}>
-            <MDXRenderer>{pageContext.body}</MDXRenderer>
+            <MDXRenderer>{node.body}</MDXRenderer>
           </MDXProvider>
+          <div>
+
+          </div>
         </PostContainer>
       </PostWrapper>
     </Layout>

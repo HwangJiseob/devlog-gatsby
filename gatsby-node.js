@@ -21,15 +21,37 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(`
     query loadPagesQuery ($limit: Int!) {
       allMdx(limit: $limit) {
-        nodes {
-          id
-          body
-          frontmatter {
-            title
-            tags
-            series
-            date
-            description
+        edges {
+          node {
+            id
+            body
+            frontmatter {
+              title
+              tags
+              series
+              date
+              description
+            }
+          }
+          previous {
+            id
+            frontmatter {
+              title
+              tags
+              series
+              date
+              description
+            }
+          }
+          next {
+            id
+            frontmatter {
+              title
+              tags
+              series
+              date
+              description
+            }
           }
         }
       }
@@ -39,10 +61,32 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
+    const series_set = new Set()
+    // const tags_set = new Set()
+
     // Create blog post pages.
-    result.data.allMdx.nodes.forEach(node => {
+    result.data.allMdx.edges.forEach(edge => {
       const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
-      const { series, title } = node.frontmatter
+      const { series, title, tags } = edge.node.frontmatter
+
+      // tag 추출 로직
+      // if(Array.isArray(tags)){
+      //   tags.forEach(tag =>{
+      //     tags_set.add(tag)
+      //   })
+      // } else {
+      //   tags_set.add(tags)
+      // }
+      // series 추출 로직
+      if(Array.isArray(series)){
+        series.forEach( _series =>{
+          series_set.add(_series)
+        })
+      } else {
+        series_set.add(_series)
+      }
+      
+
       const sluggedTitlte = korean.test(title) ? title : slugify(title)
       const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
       const path = series ? `posts/${sluggedSeries}/${sluggedTitlte}` : `posts/${sluggedTitlte}`
@@ -51,8 +95,10 @@ exports.createPages = ({ graphql, actions }) => {
         // Path for this page — required
         path: path,
         component: layout,
-        context: node
+        context: edge
       })
     })
+
+    // 개별 tag 페이지는 제작하지 않습니다.
   })
 }

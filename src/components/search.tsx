@@ -1,10 +1,13 @@
+/** @jsx jsx */
 import React, { useState, useCallback } from 'react'
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { debounce } from 'lodash'
+import { jsx, css } from '@emotion/react'
 
 import { makePostPath } from '../libs/makePostPath'
+import { openColor, nightSky } from '../libs/config'
 
-
+const { gray5 } = openColor
 
 // 출처: https://www.aboutmonica.com/blog/create-gatsby-blog-search-tutorial
 export const Search = ({ props }) => {
@@ -19,7 +22,7 @@ export const Search = ({ props }) => {
       query,
       filteredData,
     })
-  }, 300);
+  }, 200);
   
   const allPosts = props.data.allMdx.nodes
 
@@ -50,33 +53,40 @@ export const Search = ({ props }) => {
   return (
     <>
       <input
-        key='seacrhInput'
         className="searchInput"
         type="text"
         aria-label="Search"
-        placeholder="Type to filter posts..."
+        placeholder="search posts..."
         onChange={handleInputChange}
-        // value={state.query}
       />
-      <div>
+      <span style={{marginLeft: "10px"}}>
         Found {hasSearchResults ? filteredData.length : 'all' }
-      </div>
+      </span>
       {posts.map((node, idx) => {
       const { excerpt } = node
       const { title, tags, series, date, description } = node.frontmatter
       return (
         <article key={idx}>
           <header>
+            <p>{date}</p>
             <h2>
               <Link to={makePostPath(series, title)}>{title}</Link>
             </h2>
-            <p>{date}</p>
           </header>
           <div>
             {tags.map((tag, index)=>{
-              return(<span style={{marginRight: "10px"}}
-                onClick={()=>handleInputChange({ target: { value: tag } } )}
-                key={index}>{tag}</span>)
+              return(
+                <span 
+                  css={tag_button}
+                  onClick={()=>{
+                    handleInputChange({ target: { value: tag } } )
+                    const search = document.querySelector('.searchInput')
+                    search.setAttribute("value", tag)
+                  }}
+                  key={index}
+                >#{tag}
+                </span>
+              )
             })}
           </div>
           <section>
@@ -93,3 +103,15 @@ export const Search = ({ props }) => {
     </>
   )
 }
+
+export const tag_button = css`
+  cursor: pointer;
+  font-weight: bold;
+  color: ${gray5};
+  margin-right: 10px;
+  transition: all ease 0.3s;
+  &:hover {
+    color: ${nightSky.St_Patrick_Blue};
+    transition: all ease 0.3s;
+  }
+`
