@@ -62,47 +62,62 @@ export const Search = ({ props }) => {
       <span style={{marginLeft: "10px"}}>
         Found {hasSearchResults ? filteredData.length : 'all' }
       </span>
-      {posts.map((node, idx) => {
-      const { excerpt } = node
-      const { title, tags, series, date, description } = node.frontmatter
-      return (
-        <article key={idx}>
-          <header>
-            <p>{date}</p>
-            <h2>
-              <Link to={makePostPath(series, title)}>{title}</Link>
-            </h2>
-          </header>
-          <div>
-            {tags.map((tag, index)=>{
-              return(
-                <span 
-                  css={tag_button}
-                  onClick={()=>{
-                    handleInputChange({ target: { value: tag } } )
-                    const search = document.querySelector('.searchInput')
-                    search.setAttribute("value", tag)
+      <div css={post_container}>
+        {posts.map((node, idx) => {
+          const { excerpt } = node
+          const { title, tags, series, date, description } = node.frontmatter
+          return (
+            <article key={idx}>
+              <header>
+                <p>{date}</p>
+                <h2>
+                  <Link to={makePostPath(series, title)} css={post_title}>{title}</Link>
+                </h2>
+              </header>
+              <div>
+                {tags.map((tag, index)=>{
+                  return(
+                    <span 
+                      css={tag_button}
+                      onClick={()=>{
+                        handleInputChange({ target: { value: tag } } )
+                        const search = document.querySelector('.searchInput')
+                        search.setAttribute("value", tag)
+                      }}
+                      key={index}
+                    >#{tag}
+                    </span>
+                  )
+                })}
+              </div>
+              <section>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: description || excerpt,
                   }}
-                  key={index}
-                >#{tag}
-                </span>
-              )
-            })}
-          </div>
-          <section>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: description || excerpt,
-              }}
-            />
-          </section>
-          <hr />
-        </article>
-      )
-    })}
+                />
+              </section>
+              <hr />
+            </article>
+          )
+        })}
+      </div>
     </>
   )
 }
+
+export const post_container = css`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-rows: masonry;
+  grid-gap: 10px;
+`
+
+export const post_title = css`
+  color: inherit;
+  text-decoration: none;
+  transition: all ease 0.3s;
+`
 
 export const tag_button = css`
   cursor: pointer;

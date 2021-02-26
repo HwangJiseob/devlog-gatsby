@@ -83,7 +83,7 @@ exports.createPages = ({ graphql, actions }) => {
           series_set.add(_series)
         })
       } else {
-        series_set.add(_series)
+        series_set.add(series)
       }
       
 
