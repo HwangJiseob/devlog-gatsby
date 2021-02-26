@@ -110,7 +110,7 @@ export const Search = ({ props }) => {
 
 export const post_container = css`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 360px));
   grid-template-rows: masonry;
   grid-gap: 10px;
 `

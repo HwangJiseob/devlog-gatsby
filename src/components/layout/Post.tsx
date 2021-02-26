@@ -19,7 +19,7 @@ const Post = ({ pageContext }) => {
     <Layout>
       <PostWrapper>
         <PostContainer>
-          <GatsbyImage fluid={fluid}/>
+            <GatsbyImage fluid={fluid} />
           <PostTitle>{node.frontmatter.title}</PostTitle>
           <MDXProvider components={defaultComponents}>
             <MDXRenderer>{node.body}</MDXRenderer>
