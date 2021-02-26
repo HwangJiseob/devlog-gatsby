@@ -15,12 +15,7 @@ const IndexPage = () => {
   `
   return (
     <Layout>
-      <div>
-      index
-      <div>
-        호옹이
-      </div>
-    </div>
+      사이트 정비 중
     </Layout>
     
   )

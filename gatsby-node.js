@@ -4,7 +4,6 @@ const slugify = require('@sindresorhus/slugify');
 const { makePostPath } = './src/libs/makePostPath'
 
 exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
-  console.log(makePostPath)
   const config = getConfig()
   config.node = {
       fs: 'empty'

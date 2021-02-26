@@ -1,7 +1,10 @@
 import React, { useState, useCallback } from 'react'
 import { Link, graphql, useStaticQuery } from "gatsby"
+import { debounce } from 'lodash'
 
 import { makePostPath } from '../libs/makePostPath'
+
+
 
 // 출처: https://www.aboutmonica.com/blog/create-gatsby-blog-search-tutorial
 export const Search = ({ props }) => {
@@ -10,6 +13,13 @@ export const Search = ({ props }) => {
     filteredData: [],
     query: emptyQuery,
   })
+
+  const debounceSearch = debounce((query, filteredData) => {
+    setState({
+      query,
+      filteredData,
+    })
+  }, 300);
   
   const allPosts = props.data.allMdx.nodes
 
@@ -30,10 +40,7 @@ export const Search = ({ props }) => {
             .includes(query?.toLowerCase()))
       )
     })
-    setState({
-      query,
-      filteredData,
-    })
+    debounceSearch(query, filteredData)
   }, [])
 
   const { filteredData, query } = state
@@ -49,7 +56,7 @@ export const Search = ({ props }) => {
         aria-label="Search"
         placeholder="Type to filter posts..."
         onChange={handleInputChange}
-        value={state.query}
+        // value={state.query}
       />
       <div>
         Found {hasSearchResults ? filteredData.length : 'all' }

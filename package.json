@@ -34,6 +34,7 @@
     "gatsby-transformer-remark": "^2.16.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "katex": "^0.12.0",
+    "lodash": "^4.17.21",
     "micromark-extension-mdx-jsx": "^0.3.2",
     "prism-react-renderer": "^1.2.0",
     "react": "^16.13.1",
