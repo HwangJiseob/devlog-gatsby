@@ -1,14 +1,18 @@
+/** @jsx jsx */
 import React from 'react'
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
+import GatsbyImage from 'gatsby-image'
 import "katex/dist/katex.min.css"
 
 import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'
-import { layout } from '../../libs/config'
-import GatsbyImage from 'gatsby-image'
+import { layout, nightSky } from '../../libs/config'
+import { post_title } from '../search'
+import { makePostPath } from '../../libs/makePostPath'
 
 const post_width = layout.posts.max_width
 
@@ -26,6 +30,24 @@ const Post = ({ pageContext }) => {
           <MDXProvider components={defaultComponents}>
             <MDXRenderer>{node.body}</MDXRenderer>
           </MDXProvider>
+          <Navigators>
+            {next 
+              ? <div>
+                  <Link to={`/posts/${makePostPath(next.frontmatter.series, next.frontmatter.title)}`}
+                    css={navigate}>Next</Link>
+                  <Nav node={next} />
+                </div>
+              : <Center>Latest</Center>
+            }
+            {previous 
+              ? <div>
+                  <Link to={`/posts/${makePostPath(previous.frontmatter.series, previous.frontmatter.title)}`} 
+                    css={navigate}>Previous</Link>
+                  <Nav node={previous} />
+                </div>
+              : <Center>First post</Center>
+            }
+          </Navigators>
         </PostContainer>
       </PostWrapper>
     </Layout>
@@ -51,6 +73,60 @@ const PostTitle = styled.div`
   font-weight: bolder;
   box-sizing: border-box;
   padding: 40px 0;
+`
+
+const Navigators = styled.div`
+  display: grid;
+  grid-gap: 20px;
+  margin-top: 30px;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+`
+
+const Nav = ({node}) => {
+  const { date, title, description, series } = node.frontmatter
+  const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
+  return(
+    <div>
+      {fluid ? <GatsbyImage fluid={fluid} /> : null}
+      <p>{date}</p>
+      <h2>
+        <Link to={`/posts/${makePostPath(series, title)}`}
+              css={post_title}
+        >
+          {title}
+        </Link>
+      </h2>
+      <p>
+        {description}
+      </p>
+    </div>
+  )
+}
+
+export const Center = styled.div`
+  font-size: 24px;
+  color: ${nightSky.Regalia};
+  font-weight: bold;
+  display: grid;
+  place-items: center;
+`
+
+const navigate = css`
+  color: ${nightSky.Regalia};
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  font-size: 24px;
+  border-bottom: 2px solid ${nightSky.Regalia};
+  transition: all ease 0.3s;
+  margin-bottom: 20px;
+  &:hover{
+    color: ${nightSky.ChineseViolet};
+    border-bottom: 2px solid ${nightSky.ChineseViolet};
+    transition: all ease 0.3s;
+    cursor: pointer;
+  }
 `
 
 export default Post

@@ -29,7 +29,7 @@ exports.createPages = ({ graphql, actions }) => {
               title
               tags
               series
-              date
+              date(formatString: "MMMM DD, YYYY")
               description
               thumbnail {
                 childImageSharp {
@@ -50,8 +50,19 @@ exports.createPages = ({ graphql, actions }) => {
               title
               tags
               series
-              date
+              date(formatString: "MMMM DD, YYYY")
               description
+              thumbnail {
+                childImageSharp {
+                  fluid {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
             }
           }
           next {
@@ -60,8 +71,19 @@ exports.createPages = ({ graphql, actions }) => {
               title
               tags
               series
-              date
+              date(formatString: "MMMM DD, YYYY")
               description
+              thumbnail {
+                childImageSharp {
+                  fluid {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
             }
           }
         }
