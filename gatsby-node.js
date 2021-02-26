@@ -31,6 +31,17 @@ exports.createPages = ({ graphql, actions }) => {
               series
               date
               description
+              thumbnail {
+                childImageSharp {
+                  fluid {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
             }
           }
           previous {

@@ -35,6 +35,12 @@ module.exports = {
         ],
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: "1200px",
+            }
+          },
+          {
             resolve: `gatsby-remark-katex`,
             options: {
               // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here

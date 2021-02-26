@@ -8,16 +8,18 @@ import "katex/dist/katex.min.css"
 import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'
 import { layout } from '../../libs/config'
+import GatsbyImage from 'gatsby-image'
 
 const post_width = layout.posts.max_width
 
 const Post = ({ pageContext }) => {
   const { node, previous, next } = pageContext
-  console.log(previous)
+  const { fluid } = node.frontmatter?.thumbnail?.childImageSharp
   return(
     <Layout>
       <PostWrapper>
         <PostContainer>
+            <GatsbyImage fluid={fluid} />
           <PostTitle>{node.frontmatter.title}</PostTitle>
           <MDXProvider components={defaultComponents}>
             <MDXRenderer>{node.body}</MDXRenderer>
