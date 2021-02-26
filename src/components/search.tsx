@@ -68,15 +68,15 @@ export const Search = ({ props }) => {
           const { excerpt } = node
           const { title, tags, series, date, description } = node.frontmatter
           return (
-            <article key={idx}>
+            <article className="postcard" css={postcard} key={idx}>
               <header>
                 <GatsbyImage fluid={node.frontmatter?.thumbnail?.childImageSharp?.fluid} />
-                <p>{date}</p>
-                <h2>
+                <div css={datetime}>{date}</div>
+                <h2 css={title_container}>
                   <Link to={makePostPath(series, title)} css={post_title}>{title}</Link>
                 </h2>
               </header>
-              <div>
+              <div css={css`padding: 0 10px;`}>
                 {tags.map((tag, index)=>{
                   return(
                     <span 
@@ -92,14 +92,13 @@ export const Search = ({ props }) => {
                   )
                 })}
               </div>
-              <section>
+              <section css={css`padding: 0 10px;`}>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: description || excerpt,
                   }}
                 />
               </section>
-              <hr />
             </article>
           )
         })}
@@ -107,11 +106,31 @@ export const Search = ({ props }) => {
     </>
   )
 }
+export const postcard = css`
+  overflow-x: hidden;
+  border-radius: 10px;
+  /* box-sizing: border-box;
+  padding : 10px; */
+  &:hover{
+    transform: translate3d(0px, -5px, 0px);
+    box-shadow: ${gray5} 0px 1px 1px, ${gray5} 0px 4px 4px;
+  }
+`
+
+export const title_container = css`
+  padding: 0 10px;
+`
+
+export const datetime = css`
+  margin: 10px 0;
+  padding: 0 10px;
+`
 
 export const post_container = css`
+  margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 360px));
-  grid-template-rows: masonry;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  /* grid-template-rows: masonry; */
   grid-gap: 10px;
 `
 
@@ -119,6 +138,10 @@ export const post_title = css`
   color: inherit;
   text-decoration: none;
   transition: all ease 0.3s;
+  &:hover{
+    color: ${nightSky.St_Patrick_Blue};
+    transition: all ease 0.3s;
+  }
 `
 
 export const tag_button = css`

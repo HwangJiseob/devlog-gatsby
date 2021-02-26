@@ -14,19 +14,18 @@ const post_width = layout.posts.max_width
 
 const Post = ({ pageContext }) => {
   const { node, previous, next } = pageContext
-  const { fluid } = node.frontmatter?.thumbnail?.childImageSharp
+  const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
   return(
     <Layout>
       <PostWrapper>
         <PostContainer>
-            <GatsbyImage fluid={fluid} />
-          <PostTitle>{node.frontmatter.title}</PostTitle>
+          <PostTitle
+            className="postTitle"
+          >{node.frontmatter.title}</PostTitle>
+          {fluid ? <GatsbyImage fluid={fluid} /> : null}
           <MDXProvider components={defaultComponents}>
             <MDXRenderer>{node.body}</MDXRenderer>
           </MDXProvider>
-          <div>
-
-          </div>
         </PostContainer>
       </PostWrapper>
     </Layout>
@@ -43,10 +42,15 @@ export const PostContainer = styled.div`
   width: 100%;
   padding: 5px 10px;
   max-width: ${post_width};
+  font-family: 'Noto Sans KR', sans-serif;
 `
 
-const PostTitle = styled.h1`
-
+const PostTitle = styled.div`
+  font-family: 'Nanum Myeongjo',  sans-serif;
+  font-size: 2.5em;
+  font-weight: bolder;
+  box-sizing: border-box;
+  padding: 40px 0;
 `
 
 export default Post

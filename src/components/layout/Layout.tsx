@@ -22,12 +22,25 @@ export const Layout = ({ children }) => {
         background: ${nightSky.ChineseViolet};
         transition: all ease 1s;
       }
+      article[class*="postcard"]{
+        background: #855988;
+        transition: all ease 0.5s;
+      }
     }
     body[class="light"]{
       color: black;
-      background-color: white;
+      background-color: #fafafa;
       transition: color 0.5s, background-color 1s;
+
+      article[class*="postcard"]{
+        background: white;
+        transition: all ease 0.5s;
+      }
     }
+    /* @font-face {
+      font-family: "Bitstream Vera Serif Bold";
+      src: url("http://developer.mozilla.org/@api/deki/files/2934/=VeraSeBd.ttf");
+    } */
   `
   return (
     <Wrapper>

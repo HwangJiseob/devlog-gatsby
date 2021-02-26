@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import React from 'react'
-import { layout } from '../../libs/config'
+import { layout, nightSky, openColor  } from '../../libs/config'
 import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
-import Highlight, {defaultProps} from 'prism-react-renderer'
+import Highlight, { defaultProps } from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark';
 import Gist from 'super-react-gist'
 
@@ -234,6 +234,15 @@ const Table = ({children}) => {
   )
 }
 
+const Blockquote = styled.blockquote`
+  padding-left: 20px;
+  margin: auto 0;
+  color: ${openColor.gray8};
+  line-height: 1.8;
+  background: ${openColor.gray1};
+  border-left: 10px solid ${nightSky.ChineseViolet};
+`
+
 export const components = {
   code: Prism,
   Code: Code,
@@ -244,4 +253,5 @@ export const components = {
   Columns: Columns,
   Column: Column,
   table: Table,
+  blockquote:Blockquote
 }
