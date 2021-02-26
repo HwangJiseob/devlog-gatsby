@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react'
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { debounce } from 'lodash'
 import { jsx, css } from '@emotion/react'
+import GatsbyImage from 'gatsby-image'
 
 import { makePostPath } from '../libs/makePostPath'
 import { openColor, nightSky } from '../libs/config'
@@ -11,6 +12,8 @@ const { gray5 } = openColor
 
 // 출처: https://www.aboutmonica.com/blog/create-gatsby-blog-search-tutorial
 export const Search = ({ props }) => {
+  const allPosts = props.data.allMdx.nodes
+
   const emptyQuery = ""
   const [state, setState] = useState({
     filteredData: [],
@@ -23,8 +26,6 @@ export const Search = ({ props }) => {
       filteredData,
     })
   }, 200);
-  
-  const allPosts = props.data.allMdx.nodes
 
   const handleInputChange = useCallback((e) => {
     const query = e.target.value
@@ -69,6 +70,7 @@ export const Search = ({ props }) => {
           return (
             <article key={idx}>
               <header>
+                <GatsbyImage fluid={node.frontmatter?.thumbnail?.childImageSharp?.fluid} />
                 <p>{date}</p>
                 <h2>
                   <Link to={makePostPath(series, title)} css={post_title}>{title}</Link>
