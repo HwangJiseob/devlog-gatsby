@@ -19,6 +19,7 @@ const items = [
 
 export const Header = () => {
   const clicked = useRef(false)
+  const headerShow = useRef(true)
   useEffect(()=>{
     const [ nav ] = document.getElementsByTagName('nav')
     const [ list ] = nav.getElementsByTagName('ul')
@@ -34,9 +35,25 @@ export const Header = () => {
         more.classList.remove('clicked')
       }
     })
+
+    let prev = 0
+    document.addEventListener('scroll', (e)=>{
+      e.preventDefault()
+      const next = document.documentElement.scrollTop
+      const headerEl = document.querySelector('.header')
+      if((next - prev) < 0 || next < 100){
+        headerShow.current = true
+        headerEl.setAttribute('style', `top: 0px; transition: top 0.5s;`)
+      } else {
+        headerShow.current = false
+        headerEl.setAttribute('style', `top: -${header.pc_height}; transition: top 0.5s;`)
+      }
+      prev = next
+    })
   }, [])
 
   return (
+    <>
     <Wrapper className="header">
       <Container>
         <Logo onClick={()=>{navigate("/")}}>
@@ -66,16 +83,28 @@ export const Header = () => {
         </nav>
       </Container>
     </Wrapper>
+    <HeaderSpace/>
+    </>
   )
 }
-
 const Wrapper = styled.div`
+  position: fixed;
+  background-color: #fafafa;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
   width: 100%;
   height: ${header.pc_height};
 `
+
+
+const HeaderSpace = styled.div`
+  width: 100%;
+  height: ${header.pc_height};
+`
+
+
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -101,26 +130,32 @@ const nav = css`
 
   div[class*="click"]{
     top: calc(${header.pc_height} + 10px);
-    transition: all 0.5s;
+    /* transition: all 0.5s; */
     visibility: visible;
     opacity: 1;
     display: block;
     
     ${mobile_768px}{
-      transition: all 0.5s;
+      /* transition: all 0.5s; */
       position: static;
     }
   }
 
   ${mobile_768px}{
     ul {
-    left: 100%;
-    /* transition: all ease-out 0.5s; */
-    z-index: 10;
+      left: 100%;
+      transition: left 0.5s;
+      z-index: 10;
+      padding: 10px;
+      & li {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
     }
     ul[class*="click"]{
       left: 0;
-      /* transition: all ease-out 0.5s; */
+      transition: left  0.5s, background-color 0.5s;
+      transition: left 0.5s, background-color 0.5s;
     }
   }
 `
@@ -141,6 +176,8 @@ const more_featrues = css`
     transition: all 0.5s;
     visibility: visible;
     display: block;
+    position: static;
+    opacity: 1;
   }
 `
 
@@ -158,7 +195,7 @@ const menu_items = css`
     display: block;
     position: fixed;
     /* transition: all ease-out 0.5s; */
-    background: rgb(255, 255, 255);
+    background: #fafafa;
     top: ${header.mobile_height};
     width: 100%;
     height: 100%;
@@ -170,10 +207,10 @@ const menu_item = css`
   text-decoration: none;
   color: inherit;
   padding: 5px 0;
-  transition: border-bottom 0.5s, color 0.5s;
+  transition: border-bottom 0.5s;
   font-weight: bold;
   &:hover {
-    transition: border-bottom 0.5s, color 0.5s;
+    transition: border-bottom 0.5s;
     border-bottom: 3px solid ${nightSky.St_Patrick_Blue};
     color: ${nightSky.St_Patrick_Blue};
   }

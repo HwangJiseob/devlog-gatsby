@@ -5,8 +5,10 @@ import styled from '@emotion/styled'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { Main } from './Main'
-import { nightSky, openColor } from '../../libs/config'
+import { nightSky, openColor, layout } from '../../libs/config'
 // import "../../styles/layout.scss"
+
+const { mobile_768px } = layout
 
 export const Layout = ({ children }) => {
   useEffect(()=>{
@@ -28,6 +30,11 @@ export const Layout = ({ children }) => {
       div[class*="header"]{
         background-color: ${nightSky.ChineseViolet};
         transition: background-color 0.5s;
+      }
+      ul[class*="menu_items"]{
+        ${mobile_768px}{
+          background-color: #855988;          
+        }
       }
       article[class*="postcard"]{
         background-color: #855988;
