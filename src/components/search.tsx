@@ -111,7 +111,9 @@ export const postcard = css`
   border-radius: 10px;
   /* box-sizing: border-box;
   padding : 10px; */
+  transition: transform 0.5s, box-shadow 0.5s;
   &:hover{
+    transition: transform 0.5s, box-shadow 0.5s;
     transform: translate3d(0px, -5px, 0px);
     box-shadow: ${gray5} 0px 1px 1px, ${gray5} 0px 4px 4px;
   }
@@ -137,10 +139,10 @@ export const post_container = css`
 export const post_title = css`
   color: inherit;
   text-decoration: none;
-  transition: all ease 0.3s;
+  transition: color ease 0.5s;
   &:hover{
     color: ${nightSky.St_Patrick_Blue};
-    transition: all ease 0.3s;
+    transition: color ease 0.5s;
   }
 `
 
@@ -149,9 +151,9 @@ export const tag_button = css`
   font-weight: bold;
   color: ${gray5};
   margin-right: 10px;
-  transition: all ease 0.3s;
+  transition: color ease 0.5s;
   &:hover {
     color: ${nightSky.St_Patrick_Blue};
-    transition: all ease 0.3s;
+    transition: color ease 0.5s;
   }
 `

@@ -1,29 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Myeongjo&family=Noto+Sans+KR&family=Shippori+Mincho&display=swap');
 
-// body {
-//   margin: 0;
-//   padding: 0;
-//   background: #fafafa;
-// }
-// body[class="dark"]{
-//   color: #F1F3F5; //  openColor.gray1
-//   background-color: #070B34; //  nightSky.Cetacean_Blue
-//   transition: color 0.5s, background-color 1s;
-//   div[class*="header"]{
-//     background: #855988;  //  nightSky.ChineseViolet
-//     transition: all ease 0.5s;
-//   }
-//   article[class*="postcard"]{
-//     background: #855988;
-//     transition: all ease 0.5s;
-//   }
-// }
-// body[class="light"]{
-//   color: black;
-//   background: #fafafa;
-//   transition: color 0.5s, background-color 1s;
-//   article[class*="postcard"]{
-//     background: white;
-//     transition: all ease 0.5s;
-//   }
-// }
+body {
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  transition: all ease 0.5s
+}
+body[class="dark"]{
+  transition: all ease 0.5s;
+  color: #F1F3F5; //  openColor.gray1
+  background-color: #070B34; //  nightSky.Cetacean_Blue
+  
+  div[class*="header"]{
+    background: #855988;  //  nightSky.ChineseViolet
+    transition: all ease 0.5s;
+  }
+  article[class*="postcard"]{
+    background: #855988;
+    transition: all ease 0.5s;
+  }
+}
+body[class="light"]{
+  color: black;
+  background: #fafafa;
+  transition: all ease 0.5s;
+  article[class*="postcard"]{
+    background: white;
+    transition: all ease 0.5s;
+  }
+}

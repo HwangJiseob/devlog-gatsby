@@ -26,7 +26,7 @@ export const Footer = () => {
   `
   return (
     <Wrapper><Container>
-      Copyright, Email
+      © Hwang Jiseob 2021. powered by gatsby
     </Container></Wrapper>
   )
 }

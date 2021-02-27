@@ -50,6 +50,7 @@ export const Header = () => {
             {items.map((item, key) => (
               <li key={key}>
                 <Link
+                  className="menu_item"
                   css={menu_item}
                   to={item.path}
                 >
@@ -61,7 +62,7 @@ export const Header = () => {
               <ThemeToggle/>
             </div>
           </ul>
-          <button css={more_menu}> More </button>
+          <button css={more_menu}> <span className="menu_item" css={menu_item}>More</span> </button>
         </nav>
       </Container>
     </Wrapper>
@@ -69,12 +70,12 @@ export const Header = () => {
 }
 
 const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: ${header.pc_height};
-  `
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: ${header.pc_height};
+`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -82,7 +83,7 @@ const Container = styled.div`
   height: 100%;
   max-width: ${main.max_width};
   padding: 5px 10px;
-  transition: all ease 2s;
+  /* transition: all ease 0.5s; */
 `
 
 const Logo = styled.div`
@@ -99,13 +100,14 @@ const nav = css`
   overflow: hidden;
 
   div[class*="click"]{
-    top: ${header.pc_height};
-    transition: all ease-out 0.5s;
+    top: calc(${header.pc_height} + 10px);
+    transition: all 0.5s;
     visibility: visible;
     opacity: 1;
     display: block;
     
     ${mobile_768px}{
+      transition: all 0.5s;
       position: static;
     }
   }
@@ -113,12 +115,12 @@ const nav = css`
   ${mobile_768px}{
     ul {
     left: 100%;
-    transition: all ease-out 0.5s;
+    /* transition: all ease-out 0.5s; */
     z-index: 10;
     }
     ul[class*="click"]{
       left: 0;
-      transition: all ease-out 0.5s;
+      /* transition: all ease-out 0.5s; */
     }
   }
 `
@@ -126,24 +128,19 @@ const more_menu = css`
   all: unset;
   cursor: pointer;
   height: 100%;
-  transition: all ease 0.5s;
-  &:hover {
-    transition: all ease 0.5s;
-    color: ${nightSky.St_Patrick_Blue};
-  }
 `
 
 const more_featrues = css`
   position: absolute;
-  right: max(5px, calc((100vw - ${main.max_width})/2));
+  right: max(5px, calc((100vw - ${main.max_width})/2 - 15px));
   top: calc((${header.pc_height} / 3) * 2);
   visibility: hidden;
   opacity: 0;
-  transition: all ease-out 0.5s;
+  transition: all 0.5s;
   ${mobile_768px}{
+    transition: all 0.5s;
     visibility: visible;
     display: block;
-    transition: all ease-out 0.5s;
   }
 `
 
@@ -160,7 +157,7 @@ const menu_items = css`
     padding: 0;
     display: block;
     position: fixed;
-    transition: all ease-out 0.5s;
+    /* transition: all ease-out 0.5s; */
     background: rgb(255, 255, 255);
     top: ${header.mobile_height};
     width: 100%;
@@ -172,9 +169,12 @@ const menu_item = css`
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  transition: all ease 0.5s;
+  padding: 5px 0;
+  transition: border-bottom 0.5s, color 0.5s;
+  font-weight: bold;
   &:hover {
-    transition: all ease 0.5s;
+    transition: border-bottom 0.5s, color 0.5s;
+    border-bottom: 3px solid ${nightSky.St_Patrick_Blue};
     color: ${nightSky.St_Patrick_Blue};
   }
 `
