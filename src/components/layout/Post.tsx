@@ -118,6 +118,7 @@ const navigate = css`
   width: 100%;
   text-decoration: none;
   font-size: 24px;
+  font-weight: bold;
   border-bottom: 2px solid ${nightSky.Regalia};
   transition: all ease 0.3s;
   margin-bottom: 20px;

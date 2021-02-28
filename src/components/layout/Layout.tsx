@@ -6,18 +6,16 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 import { Main } from './Main'
 import { nightSky, openColor, layout } from '../../libs/config'
-// import "../../styles/layout.scss"
 
 const { mobile_768px } = layout
 
 export const Layout = ({ children }) => {
   useEffect(()=>{
-    // const body = document.body
     setTimeout(()=>{setOnLoad(true)}, 0)
-    
   }, [])
   const [onload, setOnLoad] = useState(false)
   const global = css`
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Myeongjo&family=Noto+Sans+KR&family=Shippori+Mincho&display=swap');
     body {
       margin: 0;
       padding: 0;
@@ -25,7 +23,8 @@ export const Layout = ({ children }) => {
     body[class="dark"]{
       color: ${openColor.gray1};
       background-color: ${nightSky.Cetacean_Blue};
-      transition: ${onload ? `color ease 0.5s, background-color ease 0.5s` : null};
+
+      transition: ${onload ? `color ease 0.5s, background-color 0.5s` : null};
 
       div[class*="header"]{
         background-color: ${nightSky.ChineseViolet};
@@ -37,19 +36,24 @@ export const Layout = ({ children }) => {
         }
       }
       article[class*="postcard"]{
-        background-color: #855988;
+        /* background: rgba( 133, 89, 136, 0.75 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 4.5px ); */
+        background: rgba( 133, 89, 136, 0.55 );
+        backdrop-filter: blur( 16.5px );
         transition: transform 0.5s, box-shadow 0.5s, background-color 0.5s;
         &:hover{
           transition: transform 0.5s, box-shadow 0.5s;
           transform: translate3d(0px, -5px, 0px);
-          box-shadow: ${nightSky.Cetacean_Blue} 0px 1px 1px, ${nightSky.Cetacean_Blue} 0px 4px 4px;
+          box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+          /* box-shadow: ${nightSky.Cetacean_Blue} 0px 1px 1px, ${nightSky.Cetacean_Blue} 0px 4px 4px; */
         }
       }
     }
     body[class="light"]{
       color: black;
       background-color: #fafafa;
-      transition: ${onload ? `color ease 0.5s, background-color ease 0.5s` : null};
+      transition: ${onload ? `color ease 0.5s, background-color 0.5s` : null};
 
       div[class*="header"]{
         transition: background-color 0.5s;

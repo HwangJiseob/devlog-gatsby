@@ -40,10 +40,15 @@ mdx와 katex를 연동하면서 이렇게까지 mdx를 써야하나 자괴감을
 
 테마까지 하고 싶으면 공식문서 대신 포스트를 참고하면 됩니다.
 
-###   단 나누기
-단을 컴포넌트로 나누면서 컴포넌트 안에서는 md를 비롯한 remark도 전부 먹히지 않는다는 것을 뒤늦게 깨달았습니다. 현재 gist는 `react-gist`, katex는 `react-katex`로 migration할 예정입니다.
-`react-gist`는 스크롤바 임의로 붙는 문제 때문에 폐기하고 `super-react-gist`로 갈아탔습니다.
+여기에 line numbering과 line highlight까지 추가할 예정입니다.
 
-하지만 이는 근본적인 해결책이 아닙니다. `Column` gist와 katex를 특정 컴포넌트로 대체한다면 결국 컴포넌트 안에 들어가는 children들을 모두 mdx 문법에 따라 html로 마크업해야 합니다. 하지만 직접 parsing 및 마크업 과정을 조작하는 건 매우 복잡하므로 children으로 들어오는 string을 `remark`를 통해 마크업한 다음, `dangerouslySetInnerHTML`으로 주입하는 방법이 그나마 현실적입니다. 하지만 이는 기존에 세팅한 렌더링 방법들을 재활용할 수 없으므로, Format에 대해서는  
+###   단 나누기
+단을 컴포넌트로 나누면서 컴포넌트 안에서는 md를 비롯한 remark도 전부 먹히지 않는다는 것을 뒤늦게 깨달았습니다. gist는 `react-gist`, katex는 `react-katex`로 migration하였습니다. 단 `gatsby-remark-katex`를 폐기하진 않았기 때문에 katex syntax는 사용 가능합니다. gist는 폐기하였습니다.
+
+추가로 `react-gist`는 스크롤바가 임의로 붙는 문제가 있어 `super-react-gist`로 갈아탔습니다.
+
+하지만 이는 근본적인 해결책이 아닙니다. `Column` gist와 katex를 특정 컴포넌트로 대체한다면 결국 컴포넌트 안에 들어가는 children들을 모두 mdx 문법에 따라 html로 마크업해야 합니다. 하지만 직접 parsing 및 마크업 과정을 조작하는 건 매우 복잡하므로 children으로 들어오는 string을 `remark`를 통해 마크업한 다음, `dangerouslySetInnerHTML`으로 주입하는 방법이 그나마 현실적입니다. 
+하지만 구현 과정에서 `remark`로 마크업하지 않고 차세대 마크다운 파서인 `micromark`를 사용했습니다. 그리고 katex나 gist를 고려하는 것도 힘들어서 그냥 GFM Syntax만 지원하게끔 구성하였습니다. 구현방법은 `Column` 컴포넌트에 들어오는 children의 속성값을 점검해서 text인 경우 `micromark`를 통해 html 마크업 string으로 변환한 다음 `div`에 `dangerouslySetInnerHTML`로 주입하고 React Component면 그냥 반환하게 만들었습니다. 깔끔하지는 않지만 렌더링 시점이나 seo 측면에서나 사실 기능적으로 더 건드릴 게 없어서 이 방법을 사용하였습니다.
 
 ###   슬라이드 포맷
+추후 연동 예정

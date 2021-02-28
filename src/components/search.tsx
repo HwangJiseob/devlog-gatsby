@@ -55,6 +55,7 @@ export const Search = ({ props }) => {
     <>
       <input
         className="searchInput"
+        css={searchInput}
         type="text"
         aria-label="Search"
         placeholder="search posts..."
@@ -106,16 +107,27 @@ export const Search = ({ props }) => {
     </>
   )
 }
+const searchInput = css`
+  all: unset;
+  border-bottom: 2px solid ${nightSky.ChineseViolet};
+  line-height: 2;
+  padding-left: 5px;
+  color: ${nightSky.ChineseViolet};
+  &::placeholder{
+    padding-left: 5px;
+    color: ${nightSky.ChineseViolet};
+  }
+`
+
 export const postcard = css`
   overflow-x: hidden;
   border-radius: 10px;
-  /* box-sizing: border-box;
-  padding : 10px; */
   transition: transform 0.5s, box-shadow 0.5s;
   &:hover{
     transition: transform 0.5s, box-shadow 0.5s;
     transform: translate3d(0px, -5px, 0px);
-    box-shadow: ${gray5} 0px 1px 1px, ${gray5} 0px 4px 4px;
+    /* box-shadow: ${gray5} 0px 1px 1px, ${gray5} 0px 4px 4px; */
+    box-shadow: 0 8px 32px 0 ${gray5};
   }
 `
 
@@ -139,9 +151,9 @@ export const post_container = css`
 export const post_title = css`
   color: inherit;
   text-decoration: none;
-  transition: color ease 0.5s;
+  /* transition: color ease 0.5s; */
   &:hover{
-    color: ${nightSky.St_Patrick_Blue};
+    color: ${nightSky.Cetacean_Blue};
     transition: color ease 0.5s;
   }
 `

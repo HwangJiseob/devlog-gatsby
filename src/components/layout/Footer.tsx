@@ -20,13 +20,16 @@ export const Footer = () => {
     color: ${gray2};
   `
   const Container = styled.div`
+    display: flex;
+    justify-content: center;
     width: 100%;
     padding: 5px 10px;
+    padding-top: 10px;
     max-width: ${main.max_width};
   `
   return (
     <Wrapper><Container>
-      © Hwang Jiseob 2021. powered by gatsby
+      © Hwang Jiseob 2021. build with gatsby
     </Container></Wrapper>
   )
 }
