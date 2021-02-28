@@ -145,7 +145,7 @@ export const post_container = css`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   /* grid-template-rows: masonry; */
-  grid-gap: 10px;
+  grid-gap: 15px;
 `
 
 export const post_title = css`

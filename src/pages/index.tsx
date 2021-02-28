@@ -15,7 +15,7 @@ const IndexPage = () => {
   `
   return (
     <Layout>
-      사이트 정비 중
+      사이트 준비 중
     </Layout>
   )
 }

@@ -11,7 +11,6 @@ import "katex/dist/katex.min.css"
 import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'
 import { layout, nightSky } from '../../libs/config'
-import { post_title } from '../search'
 import { makePostPath } from '../../libs/makePostPath'
 
 const post_width = layout.posts.max_width
@@ -81,6 +80,16 @@ const Navigators = styled.div`
   margin-top: 30px;
   width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+`
+
+const post_title = css`
+  color: inherit;
+  text-decoration: none;
+  /* transition: color ease 0.5s; */
+  &:hover{
+    color: ${nightSky.ChineseViolet};
+    transition: color ease 0.5s;
+  }
 `
 
 const Nav = ({node}) => {

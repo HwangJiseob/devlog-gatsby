@@ -245,6 +245,7 @@ const Blockquote = styled.blockquote`
 
 const InlineCode = styled.code`
   all: unset;
+  font-size: 12px;
   padding: 0 5px;
   padding-bottom: 2px;
   margin: 0 4px;
@@ -253,8 +254,22 @@ const InlineCode = styled.code`
   border-radius: 5px;
 `
 
+const Link = styled.a`
+  color: ${nightSky.ChineseViolet};
+`
+
+const Line = styled.hr`
+  border: none;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(133,89,136,1) 18%, rgba(107,73,132,1) 47%, rgba(72,52,117,1) 79%);
+
+`
+
 export const components = {
   inlineCode: InlineCode,
+  a:Link,
+  hr:Line,
   code: Prism,
   Code: Code,
   Youtube: Youtube,

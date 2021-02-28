@@ -19,8 +19,8 @@ exports.createPages = ({ graphql, actions }) => {
   // products, portfolio items, landing pages, etc.
   // Variables can be added as the second function parameter
   return graphql(`
-    query loadPagesQuery ($limit: Int!) {
-      allMdx(limit: $limit) {
+    query loadPagesQuery {
+      allMdx(sort: {order: DESC, fields: frontmatter___date}) {
         edges {
           node {
             id
@@ -89,7 +89,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }
-  `, { limit: 1000 }).then(result => {
+  `).then(result => {
     if (result.errors) {
       throw result.errors
     }

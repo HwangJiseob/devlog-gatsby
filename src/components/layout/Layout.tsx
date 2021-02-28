@@ -23,16 +23,11 @@ export const Layout = ({ children }) => {
     body[class="dark"]{
       color: ${openColor.gray1};
       background-color: ${nightSky.Cetacean_Blue};
-
       transition: ${onload ? `color ease 0.5s, background-color 0.5s` : null};
 
-      div[class*="header"]{
-        background-color: ${nightSky.ChineseViolet};
-        transition: background-color 0.5s;
-      }
       ul[class*="menu_items"]{
         ${mobile_768px}{
-          background-color: #855988;          
+          background: ${nightSky.Cetacean_Blue};
         }
       }
       article[class*="postcard"]{
@@ -54,13 +49,15 @@ export const Layout = ({ children }) => {
       color: black;
       background-color: #fafafa;
       transition: ${onload ? `color ease 0.5s, background-color 0.5s` : null};
-
-      div[class*="header"]{
-        transition: background-color 0.5s;
-      }
+      
       article[class*="postcard"]{
         background-color: white;
         transition: transform 0.5s, box-shadow 0.5s, background-color 0.5s;
+      }
+      ul[class*="menu_items"]{
+        ${mobile_768px}{
+          color: black;
+        }
       }
       a[class*="menu_item"], span[class*="menu_item"]{
         transition: border-bottom 0.5s color 0.5s;

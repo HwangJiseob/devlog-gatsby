@@ -14,7 +14,7 @@ const items = [
   { name: "About", path: "/about"},
   { name: "Works", path: "/works" },
   { name: "Posts", path: "/posts"},
-  { name: "Github", path: "https://github.com/HwangJiseob"}
+  { name: "Github", path: "https://github.com/HwangJiseob/devlog-gatsby"}
 ]
 
 export const Header = () => {
@@ -44,10 +44,10 @@ export const Header = () => {
       const headerEl = document.querySelector('.header')
       if((next - prev) < 0 || next < 100){
         headerShow.current = true
-        headerEl.setAttribute('style', `top: 0px; transition: top 0.5s;`)
+        headerEl.setAttribute('style', `top: 0px; transition: top 0.5s, background-color 0.5s;`)
       } else {
         headerShow.current = false
-        headerEl.setAttribute('style', `top: -65px; transition: top 0.5s;`)
+        headerEl.setAttribute('style', `top: -65px; transition: top 0.5s, background-color 0.5s;`)
         // calc(-${header.pc_height - 5px})이 동작을 안 한다.
       }
       prev = next
@@ -91,7 +91,7 @@ export const Header = () => {
 }
 const Wrapper = styled.div`
   position: fixed;
-  background-color: #fafafa;
+  background: linear-gradient(90deg, rgba(133,89,136,1) 18%, rgba(107,73,132,1) 47%, rgba(72,52,117,1) 79%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,6 +109,7 @@ const HeaderSpace = styled.div`
 
 const Container = styled.div`
   display: flex;
+  color: ${openColor.gray1};
   justify-content: space-between;
   width: 100%;
   height: 100%;
@@ -123,6 +124,11 @@ const Logo = styled.div`
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
+  transition: color ease 0.5s;
+  &:hover{
+    transition: color ease 0.5s;
+    color: ${nightSky.Cetacean_Blue};
+  }
 `
 
 const nav = css`
@@ -209,10 +215,10 @@ const menu_item = css`
   text-decoration: none;
   color: inherit;
   padding: 5px 0;
-  transition: border-bottom 0.5s;
+  transition: color 0.5s, border-bottom 0.5s;
   font-weight: bold;
   &:hover {
-    transition: border-bottom 0.5s;
+    transition: color 0.5s, border-bottom 0.5s;
     border-bottom: 3px solid ${nightSky.St_Patrick_Blue};
     color: ${nightSky.St_Patrick_Blue};
   }
