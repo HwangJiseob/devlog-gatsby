@@ -243,7 +243,18 @@ const Blockquote = styled.blockquote`
   border-left: 10px solid ${nightSky.ChineseViolet};
 `
 
+const InlineCode = styled.code`
+  all: unset;
+  padding: 0 5px;
+  padding-bottom: 2px;
+  margin: 0 4px;
+  background: ${nightSky.ChineseViolet};
+  color: ${openColor.gray1};
+  border-radius: 5px;
+`
+
 export const components = {
+  inlineCode: InlineCode,
   code: Prism,
   Code: Code,
   Youtube: Youtube,

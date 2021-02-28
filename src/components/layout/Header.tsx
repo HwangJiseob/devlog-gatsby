@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import { jsx, css } from '@emotion/react'
-import { IoMenu } from 'react-icons/io5'
 import { Link, navigate } from 'gatsby'
+import { debounce } from 'lodash'
 
 import { layout, openColor, nightSky } from '../../libs/config'
 import { ThemeToggle } from './ThemeToggle'
@@ -20,6 +20,7 @@ const items = [
 export const Header = () => {
   const clicked = useRef(false)
   const headerShow = useRef(true)
+
   useEffect(()=>{
     const [ nav ] = document.getElementsByTagName('nav')
     const [ list ] = nav.getElementsByTagName('ul')
@@ -46,7 +47,8 @@ export const Header = () => {
         headerEl.setAttribute('style', `top: 0px; transition: top 0.5s;`)
       } else {
         headerShow.current = false
-        headerEl.setAttribute('style', `top: -${header.pc_height}; transition: top 0.5s;`)
+        headerEl.setAttribute('style', `top: -65px; transition: top 0.5s;`)
+        // calc(-${header.pc_height - 5px})이 동작을 안 한다.
       }
       prev = next
     })
@@ -76,7 +78,7 @@ export const Header = () => {
               </li>
             ))}
             <div css={more_featrues}>
-              <ThemeToggle/>
+              <ThemeToggle clicked={clicked}/>
             </div>
           </ul>
           <button css={more_menu}> <span className="menu_item" css={menu_item}>More</span> </button>
