@@ -25,6 +25,7 @@ exports.createPages = ({ graphql, actions }) => {
           node {
             id
             body
+            tableOfContents(maxDepth: 6)
             frontmatter {
               title
               tags

@@ -255,7 +255,17 @@ const InlineCode = styled.code`
 `
 
 const Link = styled.a`
+  text-decoration: none;
   color: ${nightSky.ChineseViolet};
+  padding: 0 1px;
+  border-bottom: 2px solid ${nightSky.ChineseViolet};
+  transition: color ease 0.5s, border-radius ease 0.5s, background-color ease 0.5s;
+  &:hover{
+    border-radius: 5px;
+    transition: color ease 0.5s, border-radius ease 0.5s, background-color ease 0.5s;
+    color: ${openColor.gray1};
+    background-color: ${nightSky.ChineseViolet};
+  }
 `
 
 const Line = styled.hr`

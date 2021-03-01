@@ -17,6 +17,7 @@ const post_width = layout.posts.max_width
 
 const Post = ({ pageContext }) => {
   const { node, previous, next } = pageContext
+  console.log(node)
   const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
   return(
     <Layout>
