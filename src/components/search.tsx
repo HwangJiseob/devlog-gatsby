@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useLayoutEffect } from 'react'
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { debounce } from 'lodash'
 import { jsx, css } from '@emotion/react'
@@ -13,11 +13,12 @@ const { gray5 } = openColor
 // 출처: https://www.aboutmonica.com/blog/create-gatsby-blog-search-tutorial
 export const Search = ({ props }) => {
   const allPosts = props.data.allMdx.nodes
+  const tag = props?.location?.state?.tag
 
   const emptyQuery = ""
   const [state, setState] = useState({
     filteredData: [],
-    query: emptyQuery,
+    query: tag ? tag : emptyQuery,
   })
 
   const debounceSearch = debounce((query, filteredData) => {
@@ -50,6 +51,14 @@ export const Search = ({ props }) => {
   const { filteredData, query } = state
   const hasSearchResults = filteredData && query !== emptyQuery
   const posts = hasSearchResults ? filteredData : allPosts
+
+  useLayoutEffect(()=>{
+    if(tag){
+      handleInputChange({target: { value: tag } })
+      const search = document.querySelector('.searchInput')
+      search.setAttribute("value", tag)
+    }
+  }, [])
 
   return (
     <>

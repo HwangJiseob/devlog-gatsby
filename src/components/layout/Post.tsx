@@ -10,11 +10,48 @@ import "katex/dist/katex.min.css"
 
 import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'
-import { layout, nightSky } from '../../libs/config'
+import { layout, openColor, nightSky } from '../../libs/config'
 import { makePostPath } from '../../libs/makePostPath'
 import { ToC } from '../ToC'
 
 const post_width = layout.posts.max_width
+
+const Tags = ({ tags }) => {
+  const Tags_Container = styled.ul`
+  all: unset;
+  list-style: none;
+  display: flex;
+
+  li {
+    a {
+      text-decoration: none;
+      margin-right: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      color: ${openColor.gray5};
+      margin-right: 10px;
+      transition: color ease 0.5s;
+      &:hover {
+        color: ${nightSky.ChineseViolet};
+        transition: color ease 0.5s;
+      }
+    }
+  }
+`
+  return (
+    <Tags_Container>
+      {tags.map(tag => {
+        return (
+          <li>
+            <Link to='/posts' state={{tag: tag}}>
+              #{tag}
+            </Link>
+          </li>
+        )
+      })}
+    </Tags_Container>
+  )
+}
 
 const Post = ({ pageContext }) => {
   const { node, previous, next } = pageContext
@@ -26,6 +63,8 @@ const Post = ({ pageContext }) => {
           <PostTitle
             className="postTitle"
           >{node.frontmatter.title}</PostTitle>
+          <Tags tags={node.frontmatter.tags} />
+          <div style={{ marginBottom: "30px"}} />
           {fluid ? <GatsbyImage fluid={fluid} /> : null}
           <ToC items={node.tableOfContents.items} />
           <MDXProvider components={defaultComponents}>
@@ -35,7 +74,7 @@ const Post = ({ pageContext }) => {
             {next 
               ? <div>
                   <Link to={`/posts/${makePostPath(next.frontmatter.series, next.frontmatter.title)}`}
-                    css={navigate}>Next</Link>
+                    css={navigator}>Next</Link>
                   <Nav node={next} />
                 </div>
               : <Center>Latest</Center>
@@ -43,7 +82,7 @@ const Post = ({ pageContext }) => {
             {previous 
               ? <div>
                   <Link to={`/posts/${makePostPath(previous.frontmatter.series, previous.frontmatter.title)}`} 
-                    css={navigate}>Previous</Link>
+                    css={navigator}>Previous</Link>
                   <Nav node={previous} />
                 </div>
               : <Center>First post</Center>
@@ -78,7 +117,7 @@ const PostTitle = styled.div`
   font-size: 2.5em;
   font-weight: bolder;
   box-sizing: border-box;
-  padding: 40px 0;
+  padding: 40px 0 10px 0;
 `
 
 const Navigators = styled.div`
@@ -100,19 +139,22 @@ const post_title = css`
 `
 
 const Nav = ({node}) => {
-  const { date, title, description, series } = node.frontmatter
+  const { date, title, description, series, tags } = node.frontmatter
   const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
+  console.log(tags)
   return(
     <div>
       {fluid ? <GatsbyImage fluid={fluid} /> : null}
       <p>{date}</p>
       <h2>
-        <Link to={`/posts/${makePostPath(series, title)}`}
-              css={post_title}
+        <Link
+          to={`/posts/${makePostPath(series, title)}`}
+          css={post_title}
         >
           {title}
         </Link>
       </h2>
+      <Tags tags={tags} />
       <p>
         {description}
       </p>
@@ -126,9 +168,14 @@ export const Center = styled.div`
   font-weight: bold;
   display: grid;
   place-items: center;
+
+  @media screen and (max-width: 560px){
+    // 240 * 2 + (40 * 2)
+    display: none;
+  }
 `
 
-const navigate = css`
+const navigator = css`
   color: ${nightSky.Regalia};
   display: block;
   width: 100%;

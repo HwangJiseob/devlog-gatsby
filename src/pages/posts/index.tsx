@@ -8,7 +8,6 @@ import { Search } from '../../components/search'
 // 출처: https://www.aboutmonica.com/blog/create-gatsby-blog-search-tutorial
 
 const Posts = (props) => {
-  console.log(props)
   // re-render issue 때문에 search input과 search에 따른 post render 코드 전체를
   // Search component로 옮겼다.
   return (

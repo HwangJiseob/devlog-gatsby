@@ -12,7 +12,7 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  const layout = path.resolve(`src/components/layout/Post.tsx`)
+  const Post = path.resolve(`src/components/layout/Post.tsx`)
   
   // Query for markdown nodes to use in creating pages.
   // You can query for whatever data you want to create pages for e.g.
@@ -95,31 +95,10 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
-    const series_set = new Set()
-    // const tags_set = new Set()
-
     // Create blog post pages.
     result.data.allMdx.edges.forEach(edge => {
       const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
       const { series, title, tags } = edge.node.frontmatter
-
-      // tag 추출 로직
-      // if(Array.isArray(tags)){
-      //   tags.forEach(tag =>{
-      //     tags_set.add(tag)
-      //   })
-      // } else {
-      //   tags_set.add(tags)
-      // }
-      // series 추출 로직
-      if(Array.isArray(series)){
-        series.forEach( _series =>{
-          series_set.add(_series)
-        })
-      } else {
-        series_set.add(series)
-      }
-      
 
       const sluggedTitlte = korean.test(title) ? title : slugify(title)
       const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
@@ -128,11 +107,66 @@ exports.createPages = ({ graphql, actions }) => {
       createPage({
         // Path for this page — required
         path: path,
-        component: layout,
+        component: Post,
         context: edge
       })
     })
-
-    // 개별 tag 페이지는 제작하지 않습니다.
   })
 }
+
+// 개별 tag 페이지
+// exports.createPages = ({ graphql, actions }) => {
+//   const { createPage } = actions
+//   const layout = path.resolve(`src/components/layout/Post.tsx`)
+
+//   return graphql(`
+//     query loadTags{
+//       allMdx {
+//         group(field: frontmatter___series) {
+//           series: fieldValue
+//           totalCount
+//         }
+//       }
+//     }
+//   `).then(result => {
+//     if (result.errors) {
+//       throw result.errors
+//     }
+
+//     result.data.allMdx.group.forEach(async tag => {
+//       const posts = await graphql(`
+//         query loadTagPages($tag: String) {
+//           allMdx(filter: {frontmatter: {series: {eq: $series}}}) {
+//             nodes {
+//               id
+//               frontmatter {
+//                 title
+//                 description
+//                 series
+//                 date(formatString: "MMMM DD, YYYY")
+//                 tags
+//                 thumbnail {
+//                   childImageSharp {
+//                     fluid {
+//                       base64
+//                       aspectRatio
+//                       src
+//                       srcSet
+//                       sizes
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       `, { series: series.series })
+//       createPage({
+//         // Path for this page — required
+//         path: `series/${series.series}`,
+//         component: layout,
+//         context: posts
+//       })
+//     })
+//   })
+// }
