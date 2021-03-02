@@ -1,7 +1,8 @@
 ##  추가해야할 기능
 
 *   code: line numbering, line highlight
-*   toc, table of content(on/off 가능한 걸로) / progress bar의 기능을 겸용
+*   toc, table of content(결국 on/off는 미구현): 해결
+*   progress bar
 *   glassmorphism(미적용 예정)
 *   전체, tag, series에 따른 세부 분할
 *   page transition
