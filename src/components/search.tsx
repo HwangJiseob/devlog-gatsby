@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useState, useCallback, useLayoutEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { debounce } from 'lodash'
 import { jsx, css } from '@emotion/react'
@@ -20,6 +20,7 @@ export const Search = ({ props }) => {
     filteredData: [],
     query: tag ? tag : emptyQuery,
   })
+  const [ option, setOption ] = useState(tag ? "tag" : "all")
 
   const debounceSearch = debounce((query, filteredData) => {
     setState({
@@ -28,22 +29,34 @@ export const Search = ({ props }) => {
     })
   }, 200);
 
-  const handleInputChange = useCallback((e) => {
+  const handleOptionChange = useCallback(e => {
+    setOption(e.target.value)
+    handleInputChange({target: { value: state.query } }, e.target.value)
+  }, [ state ])
+
+  const handleInputChange = useCallback((e, option) => {
     const query = e.target.value
     const { data } = props
     const posts = allPosts || []
     const filteredData = posts.filter(post => {
       const { description, series, title, tags } = post.frontmatter
-      return (
-        series?.toLowerCase().includes(query?.toLowerCase()) ||
-        description?.toLowerCase().includes(query?.toLowerCase()) ||
-        title?.toLowerCase().includes(query?.toLowerCase()) ||
-        (tags &&
-          tags
-            .join("")
-            .toLowerCase()
-            .includes(query?.toLowerCase()))
-      )
+      const series_result = series?.toLowerCase().includes(query?.toLowerCase())
+      const description_result = description?.toLowerCase().includes(query?.toLowerCase())
+      const title_result = title?.toLowerCase().includes(query?.toLowerCase())
+      const tags_result = tags && tags.join("").toLowerCase().includes(query?.toLowerCase())
+      switch(option){
+        case "series":
+          return series_result
+        case "description":
+          return description_result
+        case "title":
+          return title_result
+        case "tag":
+          console.log("tag")
+          return tags_result
+        default:
+          return series_result || description_result || title_result || tags_result
+      }
     })
     debounceSearch(query, filteredData)
   }, [])
@@ -52,9 +65,12 @@ export const Search = ({ props }) => {
   const hasSearchResults = filteredData && query !== emptyQuery
   const posts = hasSearchResults ? filteredData : allPosts
 
-  useLayoutEffect(()=>{
+  useEffect(()=>{
+    const select = document.getElementsByTagName('select')[0]
+    const tag_option = select.querySelector('option[value="tag"')
+    tag_option.setAttribute('selected', true)
     if(tag){
-      handleInputChange({target: { value: tag } })
+      handleInputChange({target: { value: tag } }, option)
       const search = document.querySelector('.searchInput')
       search.setAttribute("value", tag)
     }
@@ -68,8 +84,15 @@ export const Search = ({ props }) => {
         type="text"
         aria-label="Search"
         placeholder="search posts..."
-        onChange={handleInputChange}
+        onChange={(e)=>{handleInputChange(e, option)}}
       />
+      <select onChange={handleOptionChange} css={select}>
+        <option value="all">all</option>
+        <option value="tag">tag</option>
+        <option value="title">title</option>
+        <option value="description">description</option>
+        <option value="series">series</option>
+      </select>
       <span style={{marginLeft: "10px"}}>
         Found {hasSearchResults ? filteredData.length : 'all' }
       </span>
@@ -92,7 +115,7 @@ export const Search = ({ props }) => {
                     <span 
                       css={tag_button}
                       onClick={()=>{
-                        handleInputChange({ target: { value: tag } } )
+                        handleInputChange({ target: { value: tag } }, option )
                         const search = document.querySelector('.searchInput')
                         search.setAttribute("value", tag)
                       }}
@@ -125,6 +148,22 @@ const searchInput = css`
   &::placeholder{
     padding-left: 5px;
     color: ${nightSky.ChineseViolet};
+  }
+`
+
+const select = css`
+  margin-left: 10px;
+  height: 32px;
+  background: none;
+  color: ${nightSky.ChineseViolet};
+  border: 2px solid ${nightSky.ChineseViolet};
+  &:hover {
+    cursor: pointer;
+  }
+
+  option {
+    color: ${nightSky.ChineseViolet};
+    border: 2px solid ${nightSky.ChineseViolet};
   }
 `
 
