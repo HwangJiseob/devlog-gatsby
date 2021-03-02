@@ -213,3 +213,5 @@ module.exports = {
 *     prism-react-renderer
 
 *     gatsby-remark-images
+
+#     [gatsby](https://www.gatsbyjs.com/plugins/gatsby-remark-autolink-headers/)

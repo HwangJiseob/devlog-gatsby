@@ -42,7 +42,7 @@ export const Header = () => {
       e.preventDefault()
       const next = document.documentElement.scrollTop
       const headerEl = document.querySelector('.header')
-      if((next - prev) < 0 || next < 100){
+      if(( (next - prev) < 0 && (next-prev) > -40) || next < 100){
         headerShow.current = true
         headerEl.setAttribute('style', `top: 0px; transition: top 0.5s, background-color 0.5s;`)
       } else {

@@ -9,3 +9,4 @@
 *   custom doamin(안 할 예정)
 *   utterance (댓글 기능)
 *   pagination (or windowing)
+*   Read time (예: Medium의 1 min read)

@@ -12,12 +12,12 @@ import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'
 import { layout, nightSky } from '../../libs/config'
 import { makePostPath } from '../../libs/makePostPath'
+import { ToC } from '../ToC'
 
 const post_width = layout.posts.max_width
 
 const Post = ({ pageContext }) => {
   const { node, previous, next } = pageContext
-  console.log(node)
   const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
   return(
     <Layout>
@@ -27,6 +27,7 @@ const Post = ({ pageContext }) => {
             className="postTitle"
           >{node.frontmatter.title}</PostTitle>
           {fluid ? <GatsbyImage fluid={fluid} /> : null}
+          <ToC items={node.tableOfContents.items} />
           <MDXProvider components={defaultComponents}>
             <MDXRenderer>{node.body}</MDXRenderer>
           </MDXProvider>
@@ -64,7 +65,12 @@ export const PostContainer = styled.div`
   width: 100%;
   padding: 5px 10px;
   max-width: ${post_width};
+  box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
+
+  .header-autolink {
+    display: none;
+  }
 `
 
 const PostTitle = styled.div`

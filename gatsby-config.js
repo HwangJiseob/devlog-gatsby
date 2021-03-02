@@ -35,6 +35,16 @@ module.exports = {
         ],
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              className: `header-autolink`,
+              maintainCase: false,
+              removeAccents: true,
+              isIconAfterHeader: false,
+              elements: [`h1`, `h2`, `h3`,`h4`,`h5`, `h6`],
+            }
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: "1200px",
