@@ -6,6 +6,7 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 import { Main } from './Main'
 import { nightSky, openColor, layout } from '../../libs/config'
+import { gist_dark } from '../../libs/gist_dark'
 
 const { mobile_768px } = layout
 
@@ -24,6 +25,13 @@ export const Layout = ({ children }) => {
       color: ${openColor.gray1};
       background-color: ${nightSky.Cetacean_Blue};
       transition: ${onload ? `color ease 0.5s, background-color 0.5s` : null};
+
+      /*!
+      * Gist DarkCode ver 0.2.0 
+      * Copyright (c) 2017 KillerCodes.in
+      * License: Free to use with this file header ;)
+      */
+      ${gist_dark.replace('#000', `#0d1117`)}
 
       ul[class*="menu_items"]{
         ${mobile_768px}{
