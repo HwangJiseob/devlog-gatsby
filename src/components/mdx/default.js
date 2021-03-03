@@ -67,7 +67,7 @@ const isRatio = (ratio) => {
   }
 }
 
-const Prism = ({children, className}) => {
+const Prism = ({ children, className }) => {
   const wrapper = css`
     overflow-x: auto;
   `
@@ -77,7 +77,25 @@ const Prism = ({children, className}) => {
     box-sizing: border-box;
     overflow-x: auto;
   `
-  const language = className.replace(/language-/, '') || ""
+
+  const code_title = css`
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    padding: 0 1em;
+    height: 100%;
+    width: auto;
+    background: #1e1e1e;
+  `
+
+  const lineNo = css`
+    display: inline-block;
+    width: 2em;
+    user-select: none;
+    opacity: 0.3;
+  `
+  const [lang, title] = className.replace(/language-/, '').split(":title=")
+  const language = lang || ""
   return (
     <div css={wrapper}>
       <Highlight {...defaultProps}
@@ -86,17 +104,28 @@ const Prism = ({children, className}) => {
         theme={vsDark}
       >
         {({className, style, tokens, getLineProps, getTokenProps}) => (
-          <pre className={className} style={{...style, padding: '20px'}}
+          <>
+          {title && 
+          // code_title의 style은 vsc theme에 종속적이다
+          <div style={{...style, margin: '1em 0 0 0', background: '#252526', height: '2.4em'}}>
+            <div css={code_title}>
+              {title}
+            </div>
+          </div>
+        }
+          <pre className={className} style={{...style, padding: '20px', margin: title ? '0 0 1em 0' : null}}
             css={container}
           >
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({line, key: i})}>
+                <span css={lineNo}>{i + 1}</span>
                 {line.map((token, key) => (
                   <span key={key} {...getTokenProps({token, key})} />
                 ))}
               </div>
             ))}
           </pre>
+          </>
         )}
       </Highlight>
     </div>
@@ -235,11 +264,12 @@ const Table = ({children}) => {
 }
 
 const Blockquote = styled.blockquote`
-  padding-left: 20px;
+  padding: 5px 0 5px 20px;
   margin: auto 0;
-  color: ${openColor.gray8};
+  color: inherit;
   line-height: 1.8;
-  background: ${openColor.gray1};
+  background: ${nightSky.ChineseViolet}44;
+  /* background: ${openColor.gray1}; */
   border-left: 10px solid ${nightSky.ChineseViolet};
 `
 

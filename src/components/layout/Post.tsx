@@ -141,7 +141,6 @@ const post_title = css`
 const Nav = ({node}) => {
   const { date, title, description, series, tags } = node.frontmatter
   const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
-  console.log(tags)
   return(
     <div>
       {fluid ? <GatsbyImage fluid={fluid} /> : null}
