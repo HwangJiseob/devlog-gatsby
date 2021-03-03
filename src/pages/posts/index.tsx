@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import { Link, graphql, useStaticQuery } from "gatsby"
 
 import { Layout } from '../../components/layout/Layout'
-import { makePostPath } from '../../libs/makePostPath'
+import { makePostPath } from '../../libs/makePath'
 import { Search } from '../../components/search'
 
 // 출처: https://www.aboutmonica.com/blog/create-gatsby-blog-search-tutorial

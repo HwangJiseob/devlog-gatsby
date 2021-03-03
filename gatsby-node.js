@@ -10,16 +10,14 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   }
 }
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const Post = path.resolve(`src/components/layout/Post.tsx`)
+  const Series = path.resolve(`src/components/layout/Series.tsx`)
   
-  // Query for markdown nodes to use in creating pages.
-  // You can query for whatever data you want to create pages for e.g.
-  // products, portfolio items, landing pages, etc.
-  // Variables can be added as the second function parameter
-  return graphql(`
-    query loadPagesQuery {
+  const createPostPages = async () => {
+    const result = await graphql(`
+    query loadPagesQuery{
       allMdx(sort: {order: DESC, fields: frontmatter___date}) {
         edges {
           node {
@@ -90,13 +88,10 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }
-  `).then(result => {
-    if (result.errors) {
-      throw result.errors
-    }
+  `)
 
     // Create blog post pages.
-    result.data.allMdx.edges.forEach(edge => {
+    return result.data.allMdx.edges.forEach(edge => {
       const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
       const { series, title, tags } = edge.node.frontmatter
 
@@ -104,69 +99,100 @@ exports.createPages = ({ graphql, actions }) => {
       const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
       const path = series ? `posts/${sluggedSeries}/${sluggedTitlte}` : `posts/${sluggedTitlte}`
       // const path = makePostPath(series, title
-      createPage({
+      return createPage({
         // Path for this page — required
         path: path,
         component: Post,
         context: edge
       })
     })
-  })
+  }
+
+  const createSeriesPages = async () => {
+      const series_s = (await graphql(`
+      query loadSeries {
+        allMdx {
+          group(field: frontmatter___series) {
+            series: fieldValue
+            totalCount
+          }
+        }
+      }
+    `)).data.allMdx.group
+
+    const getLatestThumbnailId = (nodes, idx) => {
+      const id = nodes[idx].frontmatter.thumbnail?.children[0]?.id
+      console.log(id)
+      if(id){
+        return id
+      } else {
+        if(idx === 0){
+          return null
+        }
+        return getLatestThumbnailId(nodes, idx - 1)
+      }
+    }
+    
+    return series_s.forEach(async target => {
+      const series = target.series
+      const posts = (await graphql(`
+        query loadPosts($series: String! ) {
+          allMdx(filter: {frontmatter: {series: {eq: $series}}}, sort: {order: DESC, fields: frontmatter___date}) {
+            nodes {
+              id
+              frontmatter {
+                title
+                tags
+                series
+                date(formatString: "MMMM DD, YYYY")
+                description
+                thumbnail {
+                  children {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+      `, {series: series})).data.allMdx.nodes
+      const id = getLatestThumbnailId(posts, posts.length - 1)
+      console.log('id', id)
+      const { fluid } = (await graphql(`
+        query loadThumbnail($id: String! ) {
+          imageSharp(id: { eq: $id }) {
+            fluid {
+              base64
+              aspectRatio
+              src
+              srcSet
+              sizes
+            }
+          }
+        }
+      `, {id: id})).data.imageSharp
+  
+      const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
+      const sluggedSeries = korean.test(series) ? series : slugify(series)
+      const path =  `series/${sluggedSeries}`
+  
+      const context = {
+        series: target,
+        posts: posts,
+        fluid: fluid
+      }
+  
+      return createPage({
+        // Path for this page — required
+        path: path,
+        component: Series,
+        context: context
+      })
+    })
+  }
+
+  return await Promise.all([
+    createPostPages(),
+    createSeriesPages()
+  ])
 }
-
-// 개별 tag 페이지
-// exports.createPages = ({ graphql, actions }) => {
-//   const { createPage } = actions
-//   const layout = path.resolve(`src/components/layout/Post.tsx`)
-
-//   return graphql(`
-//     query loadTags{
-//       allMdx {
-//         group(field: frontmatter___series) {
-//           series: fieldValue
-//           totalCount
-//         }
-//       }
-//     }
-//   `).then(result => {
-//     if (result.errors) {
-//       throw result.errors
-//     }
-
-//     result.data.allMdx.group.forEach(async tag => {
-//       const posts = await graphql(`
-//         query loadTagPages($tag: String) {
-//           allMdx(filter: {frontmatter: {series: {eq: $series}}}) {
-//             nodes {
-//               id
-//               frontmatter {
-//                 title
-//                 description
-//                 series
-//                 date(formatString: "MMMM DD, YYYY")
-//                 tags
-//                 thumbnail {
-//                   childImageSharp {
-//                     fluid {
-//                       base64
-//                       aspectRatio
-//                       src
-//                       srcSet
-//                       sizes
-//                     }
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       `, { series: series.series })
-//       createPage({
-//         // Path for this page — required
-//         path: `series/${series.series}`,
-//         component: layout,
-//         context: posts
-//       })
-//     })
-//   })
-// }

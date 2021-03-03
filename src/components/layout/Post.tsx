@@ -11,16 +11,17 @@ import "katex/dist/katex.min.css"
 import { Layout } from '../../components/layout/Layout'
 import { components as defaultComponents } from '../../components/mdx/default'
 import { layout, openColor, nightSky } from '../../libs/config'
-import { makePostPath } from '../../libs/makePostPath'
+import { makePostPath, makeSeriesPath } from '../../libs/makePath'
 import { ToC } from '../ToC'
 
 const post_width = layout.posts.max_width
 
-const Tags = ({ tags }) => {
+export const Tags = ({ tags }) => {
   const Tags_Container = styled.ul`
   all: unset;
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
 
   li {
     a {
@@ -31,6 +32,7 @@ const Tags = ({ tags }) => {
       color: ${openColor.gray5};
       margin-right: 10px;
       transition: color ease 0.5s;
+      word-break: break-all;
       &:hover {
         color: ${nightSky.ChineseViolet};
         transition: color ease 0.5s;
@@ -59,11 +61,30 @@ const Post = ({ pageContext }) => {
   return(
     <Layout>
       <PostWrapper>
-        <PostContainer>
+        <div>
           <PostTitle
             className="postTitle"
           >{node.frontmatter.title}</PostTitle>
-          <Tags tags={node.frontmatter.tags} />
+          <div css={css`
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            color: ${openColor.gray5};
+          `}>
+            <div css={css`display: flex; flex-wrap: wrap;`}>
+              {node.frontmatter.series &&
+                <div css={css`margin-right: 10px;`}>
+                  <Link to={makeSeriesPath(node.frontmatter.series)}
+                    css={series_link}
+                  >
+                    시리즈: {node.frontmatter.series}
+                  </Link>
+                </div>
+              }
+              <Tags tags={node.frontmatter.tags} />
+            </div>
+            {node.frontmatter.date}
+          </div>
           <div style={{ marginBottom: "30px"}} />
           {fluid ? <GatsbyImage fluid={fluid} /> : null}
           <ToC items={node.tableOfContents.items} />
@@ -88,29 +109,43 @@ const Post = ({ pageContext }) => {
               : <Center>First post</Center>
             }
           </Navigators>
-        </PostContainer>
+        </div>
       </PostWrapper>
     </Layout>
   )
 }
 
+
+
 export const PostWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-`
 
-export const PostContainer = styled.div`
-  width: 100%;
-  padding: 5px 10px;
-  max-width: ${post_width};
-  box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
+  & > div {
+    width: 100%;
+    padding: 5px 10px;
+    max-width: ${post_width};
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 
-  .header-autolink {
-    display: none;
+    .header-autolink {
+      display: none;
+    }
   }
 `
+
+// export const PostContainer = styled.div`
+//   width: 100%;
+//   padding: 5px 10px;
+//   max-width: ${post_width};
+//   box-sizing: border-box;
+//   font-family: 'Noto Sans KR', sans-serif;
+
+//   .header-autolink {
+//     display: none;
+//   }
+// `
 
 const PostTitle = styled.div`
   font-family: 'Nanum Myeongjo',  sans-serif;
@@ -133,6 +168,20 @@ const post_title = css`
   text-decoration: none;
   /* transition: color ease 0.5s; */
   &:hover{
+    color: ${nightSky.ChineseViolet};
+    transition: color ease 0.5s;
+  }
+`
+
+const series_link = css`
+  text-decoration: none;
+  margin-right: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: ${openColor.gray5};
+  margin-right: 10px;
+  transition: color ease 0.5s;
+  &:hover {
     color: ${nightSky.ChineseViolet};
     transition: color ease 0.5s;
   }

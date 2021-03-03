@@ -5,7 +5,7 @@ import { debounce } from 'lodash'
 import { jsx, css } from '@emotion/react'
 import GatsbyImage from 'gatsby-image'
 
-import { makePostPath } from '../libs/makePostPath'
+import { makePostPath } from '../libs/makePath'
 import { openColor, nightSky } from '../libs/config'
 
 const { gray5 } = openColor
@@ -68,7 +68,7 @@ export const Search = ({ props }) => {
   useEffect(()=>{
     const select = document.getElementsByTagName('select')[0]
     const tag_option = select.querySelector('option[value="tag"')
-    tag_option.setAttribute('selected', true)
+    tag_option.setAttribute('selected', 'true')
     if(tag){
       handleInputChange({target: { value: tag } }, option)
       const search = document.querySelector('.searchInput')
