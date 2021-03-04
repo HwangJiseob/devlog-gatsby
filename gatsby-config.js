@@ -1,29 +1,29 @@
 module.exports = {
-  pathPrefix: "/devlog-gatsby",
+  pathPrefix: `/devlog-gatsby`,
   siteMetadata: {
-    title: "devlog"
+    title: `devlog`
   },
   plugins: [
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: "pages",
+        name: `pages`,
         path: `./src/pages/`,
       }
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: "posts",
+        name: `posts`,
         path: `./src/posts/`,
       },
-      extensions: [".mdx", ".md"],
-      // __key: "posts",
+      extensions: [`.mdx`, `.md`],
+      // __key: `posts`,
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: "images",
+        name: `images`,
         path: `./src/images/`,
       }
     },
@@ -48,7 +48,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: "1200px",
+              maxWidth: `1200px`,
             }
           },
           {
@@ -59,14 +59,14 @@ module.exports = {
             }
           },
         ],
-        extensions: [".mdx", ".md"]
+        extensions: [`.mdx`, `.md`]
       }
     },
     {
       resolve: `gatsby-plugin-emotion`,
       options: {
         sourceMap: true,
-        autoLabel: "dev-only",
+        autoLabel: `dev-only`,
         labelFormat: `[local]`,
         cssPropOptimization: true,
       },
