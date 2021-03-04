@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: "devlog-gatsby",
+  pathPrefix: "/devlog-gatsby",
   siteMetadata: {
     title: "devlog"
   },
