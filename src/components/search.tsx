@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useState, useCallback, useEffect } from 'react'
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
 import { debounce } from 'lodash'
 import { jsx, css } from '@emotion/react'
 import GatsbyImage from 'gatsby-image'

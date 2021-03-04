@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react'
-import { Link, graphql, useStaticQuery } from "gatsby"
+import React from 'react'
+import { graphql } from "gatsby"
 
 import { Layout } from '../../components/layout/Layout'
 import { makePostPath } from '../../libs/makePath'

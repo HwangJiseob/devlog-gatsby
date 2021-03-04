@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react'
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link } from "gatsby"
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { jsx, css } from '@emotion/react'

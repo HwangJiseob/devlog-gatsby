@@ -1,15 +1,14 @@
 /** @jsx jsx */
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import { jsx, css } from '@emotion/react'
 import { Link, navigate } from 'gatsby'
-import { debounce } from 'lodash'
 
 import { layout, openColor, nightSky } from '../../libs/config'
 import { ThemeToggle } from './ThemeToggle'
 
 const { main, header, mobile_768px } = layout
-const { gray5 } = openColor
+
 const items = [
   { name: "About", path: "/about"},
   { name: "Works", path: "/works" },

@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from 'react'
-import { Link, graphql, useStaticQuery } from "gatsby"
+import React from 'react'
 
 import { Layout } from '../../components/layout/Layout'
 

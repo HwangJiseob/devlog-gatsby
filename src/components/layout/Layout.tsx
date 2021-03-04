@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Global, css } from '@emotion/react'
 import styled from '@emotion/styled'
 

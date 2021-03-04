@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { jsx } from '@emotion/react'
-import { ThemeManagerContext } from 'gatsby-emotion-dark-mode';
+// import { ThemeManagerContext } from 'gatsby-emotion-dark-mode';
 import { IoSunny, IoMoon } from 'react-icons/io5'
 import { ThemeToggler } from 'gatsby-plugin-dark-mode'
 import { debounce } from 'lodash'

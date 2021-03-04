@@ -1,10 +1,7 @@
 /** @jsx jsx */
 import React from 'react'
-import { Link, useStaticQuery, graphql } from "gatsby"
-import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from "gatsby-plugin-mdx"
+import { Link } from "gatsby"
 import { jsx, css } from '@emotion/react'
-import styled from '@emotion/styled'
 import GatsbyImage from 'gatsby-image'
 
 import { Layout } from '../../components/layout/Layout'
