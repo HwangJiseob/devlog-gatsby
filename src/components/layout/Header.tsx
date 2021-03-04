@@ -42,6 +42,7 @@ export const Header = () => {
 
   useEffect(()=>{
     let prev = 0
+    const hoverSpace = document.querySelector('.hoverSpace')
     document.addEventListener('scroll', (e)=>{
       e.preventDefault()
       const next = document.documentElement.scrollTop
@@ -49,6 +50,7 @@ export const Header = () => {
       if(( (next - prev) < 0) && !tocClick.onToc ){
         headerShow.current = true
         headerEl.setAttribute('style', `top: 0px; transition: top 0.5s, background-color 0.5s;`)
+        hoverSpace.removeAttribute('style')
         tocClick.toggleOnToc(false)
       } else {
         headerShow.current = false
@@ -91,6 +93,24 @@ export const Header = () => {
       </Container>
     </Wrapper>
     <HeaderSpace/>
+    <HoverSpace
+      className="hoverSpace"
+      style={ headerShow.current ? {pointerEvents: 'none'} : null}
+      onMouseOver={()=>{
+        const hoverSpace = document.querySelector('.hoverSpace')
+        const headerEl = document.querySelector('.header')
+        const top = (headerEl.getAttribute('style')).split(';')[0].split(':')[1]
+        console.log(headerShow.current)
+        if(headerShow.current){
+        } else {
+          headerShow.current = true
+          headerEl.setAttribute('style', `top: 0px; transition: top 0.5s, background-color 0.5s;`)
+          setTimeout(()=>{
+            hoverSpace.setAttribute('style', 'pointer-events: none;')
+          },0)
+        }
+      }}
+    />
     </>
   )
 }
@@ -111,9 +131,17 @@ const HeaderSpace = styled.div`
   height: ${header.pc_height};
 `
 
+const HoverSpace = styled.div`
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: ${header.pc_height};
+`
+
 
 const Container = styled.div`
   display: flex;
+  z-index: 20;
   color: ${openColor.gray1};
   justify-content: space-between;
   width: 100%;
