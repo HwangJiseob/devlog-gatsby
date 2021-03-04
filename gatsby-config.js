@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: "devlog",
+    pathPrefix: "devlog-gatsby"
   },
   plugins: [
     {
