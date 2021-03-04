@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{TIZX:function(n,c,e){"use strict";e.r(c);var o=e("lkFK"),t=e("AeFk");c.default=function(){return Object(t.c)(o.a,null,"Works")}}}]);
+//# sourceMappingURL=component---src-pages-works-index-tsx-8ee25331771ac671a484.js.map
