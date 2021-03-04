@@ -7,6 +7,7 @@ import { Footer } from './Footer'
 import { Main } from './Main'
 import { nightSky, openColor, layout } from '../../libs/config'
 import { gist_dark } from '../../libs/gist_dark'
+import { TocProvider } from '../ToC'
 
 const { mobile_768px } = layout
 
@@ -79,12 +80,14 @@ export const Layout = ({ children }) => {
   `
   return (
     <Wrapper>
-      <Global styles={global} />
-      <Header />
-      <Main>
-        {children}
-      </Main>
-      <Footer />
+      <TocProvider>
+        <Global styles={global} />
+        <Header />
+        <Main>
+          {children}
+        </Main>
+        <Footer />
+      </TocProvider>
     </Wrapper>
   )
 }

@@ -6,6 +6,7 @@ import { Link, navigate } from 'gatsby'
 
 import { layout, openColor, nightSky } from '../../libs/config'
 import { ThemeToggle } from './ThemeToggle'
+import { TocNavigator } from '../../libs/tocContext'
 
 const { main, header, mobile_768px } = layout
 
@@ -19,6 +20,8 @@ const items = [
 export const Header = () => {
   const clicked = useRef(false)
   const headerShow = useRef(true)
+  const tocClick = React.useContext(TocNavigator)
+  console.log('rerender ', tocClick)
 
   useEffect(()=>{
     const [ nav ] = document.getElementsByTagName('nav')
@@ -35,15 +38,18 @@ export const Header = () => {
         more.classList.remove('clicked')
       }
     })
+  }, [])
 
+  useEffect(()=>{
     let prev = 0
     document.addEventListener('scroll', (e)=>{
       e.preventDefault()
       const next = document.documentElement.scrollTop
       const headerEl = document.querySelector('.header')
-      if(( (next - prev) < 0 && (next-prev) > -40) || next < 100){
+      if(( (next - prev) < 0) && !tocClick.onToc ){
         headerShow.current = true
         headerEl.setAttribute('style', `top: 0px; transition: top 0.5s, background-color 0.5s;`)
+        tocClick.toggleOnToc(false)
       } else {
         headerShow.current = false
         headerEl.setAttribute('style', `top: -65px; transition: top 0.5s, background-color 0.5s;`)
@@ -51,7 +57,7 @@ export const Header = () => {
       }
       prev = next
     })
-  }, [])
+  },[tocClick])
 
   return (
     <>

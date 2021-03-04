@@ -7,8 +7,27 @@ import { jsx, css } from '@emotion/react'
 
 import { useActiveHash } from "../libs/useActiveHash"
 import { layout, nightSky, openColor } from '../libs/config'
+import { TocNavigator } from '../libs/tocContext'
 
 const { header, posts } = layout
+
+export const TocProvider = ({ children }) => {
+  const [ onToc, setOnToc ] = React.useState(false)
+  const toggleOnToc = React.useCallback((boolean)=>{
+    setOnToc(boolean)
+  }, [onToc])
+
+  return(
+    <TocNavigator.Provider
+      value={{
+        onToc,
+        toggleOnToc
+      }}
+    >
+    {children}
+  </TocNavigator.Provider>
+  )
+}
 
 const getHeadingIds = (
   toc,
@@ -36,6 +55,7 @@ const getHeadingIds = (
 }
 
 const createItems = (items, activeHash, ulStyle) => {
+  const tocClick = React.useContext(TocNavigator)
   return (
     items &&
     items.map((item, index) => {
@@ -46,9 +66,12 @@ const createItems = (items, activeHash, ulStyle) => {
         >
           {item.url && (
               <Link
-                  to={item.url}
-                  style={ isActive ? { fontWeight: 'bold', color: nightSky.ChineseViolet  } : {}} 
-                  // isActive 인지 확인하여 'bold' 할지 말지 결정한다.
+                to={item.url}
+                onClick={(e)=>{
+                  tocClick.toggleOnToc(true)
+                }}
+                style={ isActive ? { fontWeight: 'bold', color: nightSky.ChineseViolet  } : {}} 
+                // isActive 인지 확인하여 'bold' 할지 말지 결정한다.
               >     
                   {item.title}
               </Link>
@@ -70,6 +93,7 @@ const createItems = (items, activeHash, ulStyle) => {
 }
 
 export const ToC = ({ items }) => {
+  const tocClick = React.useContext(TocNavigator)
   const activeHash = useActiveHash(getHeadingIds(items, true))
   const ulStyle = {
     listStyleType: 'none',
