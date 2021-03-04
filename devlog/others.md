@@ -4,7 +4,8 @@
 *   google analytics
 *   utterance (댓글 기능)
 *   custom 404
-
+*   SEO
+*   typescript rebuilding
 
 ##  구현한 기능
 *   code title, code numbering

@@ -52,7 +52,6 @@ export const Search = ({ props }) => {
         case "title":
           return title_result
         case "tag":
-          console.log("tag")
           return tags_result
         default:
           return series_result || description_result || title_result || tags_result

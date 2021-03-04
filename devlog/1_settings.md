@@ -202,6 +202,12 @@ module.exports = {
 };
 ```
 
+##    deploy setting
+###   Github
+```sh
+npm i gh-pages -D
+```
+
 
 ##    기타 세팅(또는 모듈)
 *     react-icons

@@ -122,7 +122,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const getLatestThumbnailId = (nodes, idx) => {
       const id = nodes[idx].frontmatter.thumbnail?.children[0]?.id
-      console.log(id)
       if(id){
         return id
       } else {
@@ -157,7 +156,6 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       `, {series: series})).data.allMdx.nodes
       const id = getLatestThumbnailId(posts, posts.length - 1)
-      console.log('id', id)
       const { fluid } = (await graphql(`
         query loadThumbnail($id: String! ) {
           imageSharp(id: { eq: $id }) {

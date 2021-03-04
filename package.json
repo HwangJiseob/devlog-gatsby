@@ -51,6 +51,7 @@
     "super-react-gist": "^1.0.4"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "micromark": "^2.11.4",
     "micromark-extension-gfm": "^0.3.2",
     "micromark-extension-mdx": "^0.2.1",

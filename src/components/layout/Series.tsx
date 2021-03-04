@@ -12,11 +12,10 @@ import { layout, nightSky } from '../../libs/config'
 import { Tags } from './Post'
 import { makePostPath } from '../../libs/makePath'
 
-const tests = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+// const tests = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 const Series = ({ pageContext }) => {
   const { posts, fluid, series } = pageContext
-  console.log(fluid)
   return (
     <Layout>
       <div css={container}>
