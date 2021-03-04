@@ -67,7 +67,7 @@ export const Search = ({ props }) => {
   useEffect(()=>{
     const select = document.getElementsByTagName('select')[0]
     const tag_option = select.querySelector('option[value="tag"')
-    tag_option.setAttribute('selected', 'true')
+    tag ? tag_option.setAttribute('selected', 'true') : null
     if(tag){
       handleInputChange({target: { value: tag } }, option)
       const search = document.querySelector('.searchInput')
