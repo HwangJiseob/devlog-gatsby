@@ -20,7 +20,10 @@ export const Search = ({ props }) => {
     filteredData: [],
     query: tag ? tag : emptyQuery,
   })
+  const [ inputData, setInputData ] = useState('')
   const [ option, setOption ] = useState(tag ? "tag" : "all")
+  // const [ select_all, setSelect_all ] = useState(tag ? false : true)
+  // const [ select_tag, setSelect_tag ] = useState(tag ? true : false)
 
   const debounceSearch = debounce((query, filteredData) => {
     setState({
@@ -30,12 +33,15 @@ export const Search = ({ props }) => {
   }, 200);
 
   const handleOptionChange = useCallback(e => {
+    console.log(e.target.value)
     setOption(e.target.value)
     handleInputChange({target: { value: state.query } }, e.target.value)
   }, [ state ])
 
   const handleInputChange = useCallback((e, option) => {
     const query = e.target.value
+    setInputData(query)
+    console.log(query, option)
     const { data } = props
     const posts = allPosts || []
     const filteredData = posts.filter(post => {
@@ -60,18 +66,31 @@ export const Search = ({ props }) => {
     debounceSearch(query, filteredData)
   }, [])
 
+  const refreshSearch = useCallback((e)=>{
+    const select = document.getElementsByTagName('select')[0]
+    const options = [ ...select.getElementsByTagName('option')] // HtmlCollection to Array
+    options.forEach(option => {
+      option.selected = false
+    })
+    
+    const all = select.querySelector('option[value="all"]')
+    all.setAttribute('selected', 'true')
+
+    setInputData("")
+    handleInputChange({target: { value: "" } }, 'all')
+  }, [])
+
   const { filteredData, query } = state
   const hasSearchResults = filteredData && query !== emptyQuery
   const posts = hasSearchResults ? filteredData : allPosts
 
   useEffect(()=>{
     const select = document.getElementsByTagName('select')[0]
-    const tag_option = select.querySelector('option[value="tag"')
+    const tag_option = select.querySelector('option[value="tag"]')
     tag ? tag_option.setAttribute('selected', 'true') : null
     if(tag){
       handleInputChange({target: { value: tag } }, option)
-      const search = document.querySelector('.searchInput')
-      search.setAttribute("value", tag)
+      setInputData(tag)
     }
   }, [])
 
@@ -80,15 +99,7 @@ export const Search = ({ props }) => {
       <div>
         <h1 
           css={css`display: inline-block; cursor: pointer;`}
-          onClick={()=>{
-            const select = document.getElementsByTagName('select')[0]
-            const all = select.querySelector('option[value="all"')
-            all.setAttribute('selected', 'true')
-            
-            const input = document.querySelector('.searchInput')
-            input.setAttribute('value', "")
-            handleInputChange({target: { value: "" } }, 'all')
-          }}
+          onClick={refreshSearch}
         >
           Posts
         </h1>
@@ -99,6 +110,7 @@ export const Search = ({ props }) => {
         type="text"
         aria-label="Search"
         placeholder="search posts..."
+        value={inputData}
         onChange={(e)=>{handleInputChange(e, option)}}
       />
       <select onChange={handleOptionChange} css={select}>
@@ -131,14 +143,17 @@ export const Search = ({ props }) => {
                       css={tag_button}
                       onClick={()=>{
                         const select = document.getElementsByTagName('select')[0]
-                        const tag_option = select.querySelector('option[value="tag"')
-                        tag_option.setAttribute('selected', 'true')
+                        const options = [...select.getElementsByTagName('option')]
+                        options.forEach(option => {
+                          if(option.value === 'tag'){
+                            option.selected = true
+                          } else {
+                            option.selected = false
+                          }
+                        })
+                        
                         handleInputChange({ target: { value: tag } }, 'tag' )
-                        const search = document.querySelector('.searchInput')
-                        // const select = document.getElementsByTagName('select')[0]
-                        // const tag_option = select.querySelector('option[value="tag"')
-                        // tag ? tag_option.setAttribute('selected', 'true') : null
-                        search.setAttribute("value", tag)
+                        setInputData(tag)
                       }}
                       key={index}
                     >#{tag}
