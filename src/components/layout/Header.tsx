@@ -23,6 +23,8 @@ export const Header = () => {
   const tocClick = React.useContext(TocNavigator)
   console.log('rerender ', tocClick)
 
+  const scroll_num = useRef(0)
+
   useEffect(()=>{
     const [ nav ] = document.getElementsByTagName('nav')
     const [ list ] = nav.getElementsByTagName('ul')
@@ -44,17 +46,23 @@ export const Header = () => {
     let prev = 0
     const hoverSpace = document.querySelector('.hoverSpace')
     document.addEventListener('scroll', (e)=>{
+      if( scroll_num.current === 0 ){
+        scroll_num.current++
+        // scroll 횟수 측정이 목적은 아니기 때문에 1 이상부터는 체크하지 않음.
+        return
+      }
       e.preventDefault()
       const next = document.documentElement.scrollTop
       const headerEl = document.querySelector('.header')
       if(( (next - prev) < 0) && !tocClick.onToc ){
         headerShow.current = true
-        headerEl.setAttribute('style', `top: 0px; transition: top 0.5s, background-color 0.5s;`)
-        hoverSpace.removeAttribute('style')
+        headerEl.setAttribute('style', `top: 0px;`)
+        hoverSpace.setAttribute('style', 'display: none;')
         tocClick.toggleOnToc(false)
       } else {
         headerShow.current = false
-        headerEl.setAttribute('style', `top: -65px; transition: top 0.5s, background-color 0.5s;`)
+        headerEl.setAttribute('style', `top: -65px;`)
+        hoverSpace.setAttribute('style', 'display: block;')
         // calc(-${header.pc_height - 5px})이 동작을 안 한다.
       }
       prev = next
@@ -100,13 +108,12 @@ export const Header = () => {
         const hoverSpace = document.querySelector('.hoverSpace')
         const headerEl = document.querySelector('.header')
         const top = (headerEl.getAttribute('style')).split(';')[0].split(':')[1]
-        console.log(headerShow.current)
         if(headerShow.current){
         } else {
           headerShow.current = true
           headerEl.setAttribute('style', `top: 0px; transition: top 0.5s, background-color 0.5s;`)
           setTimeout(()=>{
-            hoverSpace.setAttribute('style', 'pointer-events: none;')
+            hoverSpace.setAttribute('style', 'display: none;')
           },0)
         }
       }}
@@ -122,6 +129,8 @@ const Wrapper = styled.div`
   align-items: center;
   z-index: 1;
   width: 100%;
+  top: 0; // 초기값.
+  transition: top 0.5s, background-color 0.5s;
   height: ${header.pc_height};
 `
 
