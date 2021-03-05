@@ -12,9 +12,6 @@ const Posts = (props) => {
   // Search component로 옮겼다.
   return (
     <Layout>
-      <h1>
-        Posts
-      </h1>
       <Search props={props} />
     </Layout>
   )

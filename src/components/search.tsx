@@ -77,6 +77,22 @@ export const Search = ({ props }) => {
 
   return (
     <>
+      <div>
+        <h1 
+          css={css`display: inline-block; cursor: pointer;`}
+          onClick={()=>{
+            const select = document.getElementsByTagName('select')[0]
+            const all = select.querySelector('option[value="all"')
+            all.setAttribute('selected', 'true')
+            
+            const input = document.querySelector('.searchInput')
+            input.setAttribute('value', "")
+            handleInputChange({target: { value: "" } }, 'all')
+          }}
+        >
+          Posts
+        </h1>
+      </div>
       <input
         className="searchInput"
         css={searchInput}
@@ -114,8 +130,14 @@ export const Search = ({ props }) => {
                     <span 
                       css={tag_button}
                       onClick={()=>{
-                        handleInputChange({ target: { value: tag } }, option )
+                        const select = document.getElementsByTagName('select')[0]
+                        const tag_option = select.querySelector('option[value="tag"')
+                        tag_option.setAttribute('selected', 'true')
+                        handleInputChange({ target: { value: tag } }, 'tag' )
                         const search = document.querySelector('.searchInput')
+                        // const select = document.getElementsByTagName('select')[0]
+                        // const tag_option = select.querySelector('option[value="tag"')
+                        // tag ? tag_option.setAttribute('selected', 'true') : null
                         search.setAttribute("value", tag)
                       }}
                       key={index}
