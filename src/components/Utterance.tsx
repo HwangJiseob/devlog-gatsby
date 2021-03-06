@@ -7,7 +7,7 @@ const repo = "HwangJiseob/devlog-gatsby"
 
 export const Utterances: React.FC= React.memo(() => {
     const containerRef = createRef<HTMLDivElement>();
-    const [theme, setTheme] = React.useState(document.body.className)
+    const [theme, setTheme] = React.useState('')
 
     useLayoutEffect(()=>{
       const observer = new MutationObserver(function(mutations) {
@@ -26,7 +26,7 @@ export const Utterances: React.FC= React.memo(() => {
           repo,
           'issue-term': 'pathname',
           label: 'comment',
-          theme: theme === 'dark' ? 'github-dark' : 'github-light',
+          theme: document.body.className === 'dark' ? 'github-dark' : 'github-light',
           crossOrigin: 'anonymous',
           async: 'true'
       };

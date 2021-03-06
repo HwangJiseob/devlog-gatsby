@@ -1,10 +1,10 @@
 ##  추가해야할 기능
 *   series index page (디자인을 결정하지 않음.)
-*   google analytics
-*   utterance (댓글 기능)
 *   typescript rebuilding
 
 ##  구현한 기능
+*   google analytics
+*   utterance (댓글 기능)
 *   SEO (robots.txt 제외)
 *   code title, code numbering
 *   series 페이지 (개별 페이지만 구현)
