@@ -21,9 +21,10 @@ export const Header = () => {
   const clicked = useRef(false)
   const headerShow = useRef(true)
   const tocClick = React.useContext(TocNavigator)
-  console.log('rerender ', tocClick)
 
   const scroll_num = useRef(0)
+
+  let onload = false
 
   useEffect(()=>{
     const [ nav ] = document.getElementsByTagName('nav')
@@ -40,15 +41,21 @@ export const Header = () => {
         more.classList.remove('clicked')
       }
     })
+    setTimeout(()=>{
+      onload = true
+      console.log("호우!")
+    }, 0)
   }, [])
 
   useEffect(()=>{
     let prev = 0
     const hoverSpace = document.querySelector('.hoverSpace')
     document.addEventListener('scroll', (e)=>{
-      if( scroll_num.current === 0 ){
-        scroll_num.current++
-        // scroll 횟수 측정이 목적은 아니기 때문에 1 이상부터는 체크하지 않음.
+      if( !onload ){
+        // scroll_num.current++
+        // onload가 되지 않으면 scroll 자체를 막음.
+        // Post를 읽다가 height가 짧은 페이지로 넘어가는 경우, 스크롤이 끌어올려지면서
+        // scroll 이벤트가 강제로 발생되는 현상을 수정함.
         return
       }
       e.preventDefault()

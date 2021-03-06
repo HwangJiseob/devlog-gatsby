@@ -60,13 +60,14 @@ const Post = ({ pageContext }) => {
   const { node, previous, next } = pageContext
   const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
 
+  const { title, description, tags } = node.frontmatter
   return(
     <>
     <SEO
-      title={node.frontmatter.title}
-      description={node.frontmatter.description || node.excerpt}
-      image={fluid.src}
-      keywords={node.frontmatter.tags}
+      title={title && title}
+      description={description ? description : node?.excerpt}
+      image={fluid && fluid.src}
+      keywords={ tags && tags}
     />
     <Layout>
       <PostWrapper>

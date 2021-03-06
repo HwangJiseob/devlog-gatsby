@@ -21,3 +21,4 @@
 *   glassmorphism
 *   page transition
 *   custom doamin(devlog-gatsby에서는 안 할 예정)
+*   최상단 & 최하단 이동 기능
