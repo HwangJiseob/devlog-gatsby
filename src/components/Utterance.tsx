@@ -19,10 +19,7 @@ export const Utterances: React.FC= React.memo(() => {
       });
       const config = { attributes: true };
       observer.observe(document.body, config);
-    }, [])
 
-    useLayoutEffect(() => {
-      // const container = document.getElementById('utterances')
       const utterances = document.createElement('script');
       const attributes = {  
           src,
@@ -38,15 +35,20 @@ export const Utterances: React.FC= React.memo(() => {
           utterances.setAttribute(key, value);
       });
 
-      setTimeout(async ()=>{
-        await containerRef.current.appendChild(utterances);
-        if(containerRef.current.childNodes.length === 2){
-          await containerRef.current.setAttribute('style', 'visibility: hidden;')
-          const old = await containerRef.current.childNodes[0]
-          await (old && containerRef.current.removeChild(old))
-          await containerRef.current.removeAttribute('style') 
-        }
-      }, 0)
+      containerRef.current.appendChild(utterances);
+    }, [])
+
+    useLayoutEffect(() => {
+      // 출처: https://stackoverflow.com/questions/217776/how-to-apply-css-to-iframe
+      const iframes = [...document.getElementsByTagName('iframe')]
+      const [ utterances ] = iframes.filter(iframe => iframe.className === 'utterances-frame')
+      if(utterances){
+        const message = {
+          type: 'set-theme',
+          theme: theme === 'dark' ? 'github-dark' : 'github-light',
+        };
+        utterances.contentWindow.postMessage(message, 'https://utteranc.es');
+      }
     }, [theme]);
 
     return <div ref={containerRef} />;
