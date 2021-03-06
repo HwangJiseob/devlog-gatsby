@@ -78,6 +78,7 @@ export const Header = () => {
           {/* 하나의 css 안에서 자식 요소들까지 모두 컨트롤 해야 할 듯 */}
           <ul
             css={menu_items}
+            className="menu_items"
           >
             {items.map((item, key) => (
               <li key={key}>
