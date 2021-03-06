@@ -24,8 +24,6 @@ export const Header = () => {
 
   const scroll_num = useRef(0)
 
-  let onload = false
-
   useEffect(()=>{
     const [ nav ] = document.getElementsByTagName('nav')
     const [ list ] = nav.getElementsByTagName('ul')
@@ -41,20 +39,14 @@ export const Header = () => {
         more.classList.remove('clicked')
       }
     })
-    setTimeout(()=>{
-      onload = true
-    }, 0)
   }, [])
 
   useEffect(()=>{
     let prev = 0
     const hoverSpace = document.querySelector('.hoverSpace')
     document.addEventListener('scroll', (e)=>{
-      if( !onload ){
-        // scroll_num.current++
-        // onload가 되지 않으면 scroll 자체를 막음.
-        // Post를 읽다가 height가 짧은 페이지로 넘어가는 경우, 스크롤이 끌어올려지면서
-        // scroll 이벤트가 강제로 발생되는 현상을 수정함.
+      if( scroll_num.current < 2 ){
+        scroll_num.current++
         return
       }
       e.preventDefault()

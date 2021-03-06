@@ -120,7 +120,7 @@ const Post = ({ pageContext }) => {
               : <Center>First post</Center>
             }
           </Navigators>
-          {/* <Utterances/> */}
+          <Utterances/>
         </div>
       </PostWrapper>
     </Layout>

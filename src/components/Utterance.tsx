@@ -8,7 +8,6 @@ const repo = "HwangJiseob/devlog-gatsby"
 export const Utterances: React.FC= React.memo(() => {
     const containerRef = createRef<HTMLDivElement>();
     const [theme, setTheme] = React.useState(document.body.className)
-    console.log("??")
 
     useLayoutEffect(()=>{
       const observer = new MutationObserver(function(mutations) {
