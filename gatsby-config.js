@@ -5,6 +5,15 @@ module.exports = {
     siteUrl: `https://hwangjiseob.github.io/devlog-gatsby`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingId: `G-X3YNSHRHBT`, // 측정 ID
+        pluginConfig: {
+          head: true
+        }
+      },
+    },
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`, 
     {

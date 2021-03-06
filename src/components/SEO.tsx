@@ -1,5 +1,4 @@
 import React from 'react'
-import { useStaticQuery, graphql } from "gatsby"
 import { Helmet } from 'react-helmet'
 import { useLocation } from "@reach/router"
 
@@ -28,6 +27,7 @@ export const SEO = ({ title, description, keywords, image }: props) => {
       <meta name="keywords" content={keywords ? keywords.join(',') : defaultKeywords.join(',')}/>
       <meta name="copyright" content="Copyright 2021 Hwang Jiseob" />
       <meta name="author" content={author} />
+      <meta name="google-site-verification" content="-E7CHMORhcfUhofzQGb5LRku32ldp8XPHUk3SsO6zPo" />
       {image && <meta name="image" content={image}/>}
 
       {/* facebook */}
