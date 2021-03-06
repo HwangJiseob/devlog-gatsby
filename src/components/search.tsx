@@ -33,7 +33,6 @@ export const Search = ({ props }) => {
   }, 200);
 
   const handleOptionChange = useCallback(e => {
-    console.log(e.target.value)
     setOption(e.target.value)
     handleInputChange({target: { value: state.query } }, e.target.value)
   }, [ state ])
@@ -41,7 +40,6 @@ export const Search = ({ props }) => {
   const handleInputChange = useCallback((e, option) => {
     const query = e.target.value
     setInputData(query)
-    console.log(query, option)
     const { data } = props
     const posts = allPosts || []
     const filteredData = posts.filter(post => {

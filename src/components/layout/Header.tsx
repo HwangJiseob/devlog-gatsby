@@ -6,7 +6,7 @@ import { Link, navigate } from 'gatsby'
 
 import { layout, openColor, nightSky } from '../../libs/config'
 import { ThemeToggle } from './ThemeToggle'
-import { TocNavigator } from '../../libs/tocContext'
+import { TocNavigator } from '../../libs/contexts'
 
 const { main, header, mobile_768px } = layout
 
@@ -43,7 +43,6 @@ export const Header = () => {
     })
     setTimeout(()=>{
       onload = true
-      console.log("호우!")
     }, 0)
   }, [])
 

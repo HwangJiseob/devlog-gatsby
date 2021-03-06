@@ -7,7 +7,7 @@ import { jsx, css } from '@emotion/react'
 
 import { useActiveHash } from "../libs/useActiveHash"
 import { layout, nightSky, openColor } from '../libs/config'
-import { TocNavigator } from '../libs/tocContext'
+import { TocNavigator } from '../libs/contexts'
 
 const { header, posts } = layout
 

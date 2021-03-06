@@ -14,6 +14,7 @@ import { layout, openColor, nightSky } from '../../libs/config'
 import { makePostPath, makeSeriesPath } from '../../libs/makePath'
 import { ToC } from '../ToC'
 import { SEO } from '../SEO'
+import { Utterances } from '../Utterance'
 
 const post_width = layout.posts.max_width
 
@@ -119,6 +120,7 @@ const Post = ({ pageContext }) => {
               : <Center>First post</Center>
             }
           </Navigators>
+          {/* <Utterances/> */}
         </div>
       </PostWrapper>
     </Layout>
