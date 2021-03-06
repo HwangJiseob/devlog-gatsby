@@ -29,7 +29,7 @@ export const Footer = () => {
   `
   return (
     <Wrapper><Container>
-      © Hwang Jiseob 2021. build with gatsby
+      © Hwang Jiseob 2021. built with gatsby
     </Container></Wrapper>
   )
 }

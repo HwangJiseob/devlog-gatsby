@@ -1,10 +1,14 @@
 import { Layout } from '../components/layout/Layout'
+import { SEO } from '../components/SEO'
 
 const About = () => {
   return (
+    <>
+    <SEO title="About" />
     <Layout>
       About
     </Layout>
+    </>
   )
 }
 

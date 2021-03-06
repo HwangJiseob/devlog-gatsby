@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import { Layout } from '../../components/layout/Layout'
 import { makePostPath } from '../../libs/makePath'
 import { Search } from '../../components/search'
+import { SEO } from '../../components/SEO'
 
 // 출처: https://www.aboutmonica.com/blog/create-gatsby-blog-search-tutorial
 
@@ -11,9 +12,12 @@ const Posts = (props) => {
   // re-render issue 때문에 search input과 search에 따른 post render 코드 전체를
   // Search component로 옮겼다.
   return (
+    <>
+    <SEO title="Posts" />
     <Layout>
       <Search props={props} />
     </Layout>
+    </>
   )
 }
 

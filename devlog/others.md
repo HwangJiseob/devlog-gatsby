@@ -10,7 +10,7 @@
 *   series 페이지 (개별 페이지만 구현)
 *   toc, table of content(결국 on/off는 미구현)
 *   전체, tag, series에 따른 세부 검색
-*   post를 읽다가 menu가 있었던 곳에 마우스를 올리면 다시 메뉴가 내려오는 기능
+*   post를 읽다가 menu가 있었던 곳에 마우스를 올리면 다시 메뉴가 내려오는 기능 (다시 올라가는 건 미구현)
 
 #   생각하고 있는 기능
 *   code line highlight (내가 안 쓸 것 같아.)

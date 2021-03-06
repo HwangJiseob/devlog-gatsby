@@ -8,17 +8,21 @@ import { Layout } from '../../components/layout/Layout'
 import { layout, nightSky } from '../../libs/config'
 import { Tags } from './Post'
 import { makePostPath } from '../../libs/makePath'
+import { SEO } from '../SEO'
 
 // const tests = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 const Series = ({ pageContext }) => {
   const { posts, fluid, series } = pageContext
   return (
+    <>
+    <SEO title={`시리즈: ${series}`} />
     <Layout>
       <div css={container}>
         <div>
           <div>
             {fluid ? <GatsbyImage fluid={fluid} /> : null}
+            {/* 시리즈 중 가장 최근 포스트의 thumbnail을 시리즈 thumbnail로 사용 */}
           </div>
           <h1>
             {series.series}
@@ -45,6 +49,7 @@ const Series = ({ pageContext }) => {
         </div>
       </div>
     </Layout>
+    </>
   )
 }
 

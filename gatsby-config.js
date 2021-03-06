@@ -1,9 +1,12 @@
 module.exports = {
   pathPrefix: `/devlog-gatsby`,
   siteMetadata: {
-    title: `devlog`
+    title: `devlog`,
+    siteUrl: `https://hwangjiseob.github.io/devlog-gatsby`,
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-react-helmet`, 
     {
       resolve: `gatsby-source-filesystem`,
       options: {

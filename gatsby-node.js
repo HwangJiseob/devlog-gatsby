@@ -23,6 +23,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             id
             body
+            excerpt(pruneLength: 200)
             tableOfContents(maxDepth: 6)
             frontmatter {
               title
@@ -156,6 +157,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       `, {series: series})).data.allMdx.nodes
       const id = getLatestThumbnailId(posts, posts.length - 1)
+      // 시리즈 중 가장 최근 포스트의 thumbnail을 시리즈 thumbnail로 사용
       const { fluid } = (await graphql(`
         query loadThumbnail($id: String! ) {
           imageSharp(id: { eq: $id }) {

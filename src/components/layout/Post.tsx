@@ -13,6 +13,7 @@ import { components as defaultComponents } from '../../components/mdx/default'
 import { layout, openColor, nightSky } from '../../libs/config'
 import { makePostPath, makeSeriesPath } from '../../libs/makePath'
 import { ToC } from '../ToC'
+import { SEO } from '../SEO'
 
 const post_width = layout.posts.max_width
 
@@ -58,7 +59,15 @@ export const Tags = ({ tags }) => {
 const Post = ({ pageContext }) => {
   const { node, previous, next } = pageContext
   const fluid = node.frontmatter?.thumbnail?.childImageSharp?.fluid
+
   return(
+    <>
+    <SEO
+      title={node.frontmatter.title}
+      description={node.frontmatter.description || node.excerpt}
+      image={fluid.src}
+      keywords={node.frontmatter.tags}
+    />
     <Layout>
       <PostWrapper>
         <div>
@@ -112,6 +121,7 @@ const Post = ({ pageContext }) => {
         </div>
       </PostWrapper>
     </Layout>
+    </>
   )
 }
 
