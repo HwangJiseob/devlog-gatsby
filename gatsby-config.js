@@ -8,7 +8,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: `G-X3YNSHRHBT`, // 측정 ID
+        trackingIds: [`G-X3YNSHRHBT`], // 측정 ID
         pluginConfig: {
           head: true
         }

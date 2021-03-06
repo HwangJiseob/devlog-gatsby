@@ -8,12 +8,36 @@ export const makePostPath = (series, title) => {
 
   // 또한 post/index.tsx에서 routing을 해주므로 gatsby-mode.js와 달리 path를 return할 때
   // posts/를 빼준다.
-  const sluggedTitlte = korean.test(title) ? title : slugify(title)
-  const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
+  const sluggedTitlte = title.split('').map(letter => {
+    if(korean.test(letter)){
+      return letter
+    } else if(letter === " ") {
+      return "-"
+    } else {
+      return slugify(letter)
+    }
+  }).join('')
+  const sluggedSeries = series ? series.split('').map(letter => {
+    if(korean.test(letter)){
+      return letter
+    } else if(letter === " ") {
+      return "-"
+    } else {
+      return slugify(letter)
+    }
+  }).join('') : null
   return series ? `${sluggedSeries}/${sluggedTitlte}` : sluggedTitlte
 }
 
 export const makeSeriesPath = series => {
-  const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
+  const sluggedSeries = series ? series.split('').map(letter => {
+    if(korean.test(letter)){
+      return letter
+    } else if(letter === " ") {
+      return "-"
+    } else {
+      return slugify(letter)
+    }
+  }).join('') : null
   return `/series/${sluggedSeries}`
 }

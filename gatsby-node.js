@@ -96,8 +96,29 @@ exports.createPages = async ({ graphql, actions }) => {
       const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
       const { series, title, tags } = edge.node.frontmatter
 
-      const sluggedTitlte = korean.test(title) ? title : slugify(title)
-      const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
+      // const sluggedTitlte = korean.test(title) ? title : slugify(title)
+
+      const sluggedTitlte = title.split('').map(letter => {
+        if(korean.test(letter)){
+          return letter
+        } else if(letter === " ") {
+          return "-"
+        } else {
+          return slugify(letter)
+        }
+      }).join('')
+
+      // const sluggedSeries = series ? (korean.test(series) ? series : slugify(series) ) : null
+
+      const sluggedSeries = series ? series.split('').map(letter => {
+        if(korean.test(letter)){
+          return letter
+        } else if(letter === " ") {
+          return "-"
+        } else {
+          return slugify(letter)
+        }
+      }).join('') : null
       const path = series ? `posts/${sluggedSeries}/${sluggedTitlte}` : `posts/${sluggedTitlte}`
       // const path = makePostPath(series, title
       return createPage({
@@ -173,7 +194,15 @@ exports.createPages = async ({ graphql, actions }) => {
       `, {id: id})).data.imageSharp
   
       const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/
-      const sluggedSeries = korean.test(series) ? series : slugify(series)
+      const sluggedSeries = series.split('').map(letter => {
+        if(korean.test(letter)){
+          return letter
+        } else if(letter === " ") {
+          return "-"
+        } else {
+          return slugify(letter)
+        }
+      }).join('')
       const path =  `series/${sluggedSeries}`
   
       const context = {
