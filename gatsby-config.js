@@ -6,6 +6,18 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `devlog-gatsby`,
+        short_name: `devlog`,
+        start_url: `/devlog-gatsby`,
+        background_color: `#fafafa`,  // light background
+        theme_color: `#855988`, // 
+        display: `standalone`,
+        icon: `src/images/icon.png`,
+      }
+    },
+    {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         trackingIds: [`G-X3YNSHRHBT`], // 측정 ID

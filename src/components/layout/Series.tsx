@@ -14,7 +14,7 @@ const Series = ({ pageContext }) => {
   const { posts, fluid, series } = pageContext
   return (
     <>
-    <SEO title={`시리즈: ${series}`} />
+    <SEO title={`시리즈: ${series.series}`} />
     <Layout>
       <div css={container}>
         <div>
