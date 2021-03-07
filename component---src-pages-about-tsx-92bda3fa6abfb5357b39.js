@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{"2l/u":function(t,n,c){"use strict";c.r(n);var e=c("q1tI"),u=c.n(e),a=c("lkFK"),l=c("1Yd/"),o=c("AeFk");n.default=function(){return Object(o.c)(u.a.Fragment,null,Object(o.c)(l.a,{title:"About"}),Object(o.c)(a.a,null,"About"))}}}]);
+//# sourceMappingURL=component---src-pages-about-tsx-92bda3fa6abfb5357b39.js.map

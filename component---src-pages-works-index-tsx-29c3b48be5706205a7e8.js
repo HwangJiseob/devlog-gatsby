@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{TIZX:function(n,t,c){"use strict";c.r(t);var e=c("q1tI"),a=c.n(e),o=c("lkFK"),r=c("1Yd/"),u=c("AeFk");t.default=function(){return Object(u.c)(a.a.Fragment,null,Object(u.c)(r.a,{title:"Works"}),Object(u.c)(o.a,null,"Works"))}}}]);
+//# sourceMappingURL=component---src-pages-works-index-tsx-29c3b48be5706205a7e8.js.map

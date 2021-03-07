@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{QeBL:function(e,t,n){"use strict";n.r(t);var a=n("DZdY"),r=n("q1tI"),c=n("AeFk"),o=n("4Grd"),u=n("lkFK");t.default=function(){var e=Object(r.useContext)(o.ThemeManagerContext);Object(a.a)("div",{target:"er94mbl0"})("color:",e.isDark?"blue":"black",";");return Object(c.c)(u.a,null,"사이트 준비 중")}}}]);
-//# sourceMappingURL=component---src-pages-index-tsx-edf191ca059915b3abd2.js.map
