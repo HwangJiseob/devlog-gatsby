@@ -59,9 +59,8 @@ export const Header = () => {
         tocClick.toggleOnToc(false)
       } else {
         headerShow.current = false
-        headerEl.setAttribute('style', `top: -65px;`)
+        headerEl.setAttribute('style', `top: -65px;`) // calc(-${header.pc_height - 5px})이 동작을 안 한다.
         hoverSpace.setAttribute('style', 'display: block;')
-        // calc(-${header.pc_height - 5px})이 동작을 안 한다.
       }
       prev = next
     })
@@ -75,7 +74,6 @@ export const Header = () => {
           Hwang Jiseob
         </Logo>
         <nav css={nav}>
-          {/* 하나의 css 안에서 자식 요소들까지 모두 컨트롤 해야 할 듯 */}
           <ul
             css={menu_items}
             className="menu_items"
@@ -131,6 +129,7 @@ const Wrapper = styled.div`
   top: 0; // 초기값.
   transition: top 0.5s, background-color 0.5s;
   height: ${header.pc_height};
+  box-shadow: 0px -3px 9px 3px ${nightSky.Cetacean_Blue};
 `
 
 
@@ -156,7 +155,6 @@ const Container = styled.div`
   height: 100%;
   max-width: ${main.max_width};
   padding: 5px 10px;
-  /* transition: all ease 0.5s; */
 `
 
 const Logo = styled.div`
@@ -179,13 +177,11 @@ const nav = css`
 
   div[class*="click"]{
     top: calc(${header.pc_height} + 10px);
-    /* transition: all 0.5s; */
     visibility: visible;
     opacity: 1;
     display: block;
     
     ${mobile_768px}{
-      /* transition: all 0.5s; */
       position: static;
     }
   }
@@ -235,7 +231,6 @@ const menu_items = css`
   margin: 0 20px 0 0;
   padding: 0;
   gap: 20px;
-  /* justify-content: space-around; */
   align-items: center;
   list-style: none;
   ${mobile_768px}{
@@ -243,7 +238,6 @@ const menu_items = css`
     padding: 0;
     display: block;
     position: fixed;
-    /* transition: all ease-out 0.5s; */
     background: #fafafa;
     top: ${header.mobile_height};
     width: 100%;

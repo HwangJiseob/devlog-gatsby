@@ -5,7 +5,7 @@ import { debounce } from 'lodash'
 import { jsx, css } from '@emotion/react'
 import GatsbyImage from 'gatsby-image'
 
-import { makePostPath } from '../libs/makePath'
+import { makePostPath, makeSeriesPath } from '../libs/makePath'
 import { openColor, nightSky } from '../libs/config'
 
 const { gray5 } = openColor
@@ -22,8 +22,6 @@ export const Search = ({ props }) => {
   })
   const [ inputData, setInputData ] = useState('')
   const [ option, setOption ] = useState(tag ? "tag" : "all")
-  // const [ select_all, setSelect_all ] = useState(tag ? false : true)
-  // const [ select_tag, setSelect_tag ] = useState(tag ? true : false)
 
   const debounceSearch = debounce((query, filteredData) => {
     setState({
@@ -66,7 +64,7 @@ export const Search = ({ props }) => {
 
   const refreshSearch = useCallback((e)=>{
     const select = document.getElementsByTagName('select')[0]
-    const options = [ ...select.getElementsByTagName('option')] // HtmlCollection to Array
+    const options = [ ...select.getElementsByTagName('option')]
     options.forEach(option => {
       option.selected = false
     })
@@ -135,6 +133,13 @@ export const Search = ({ props }) => {
                 </h2>
               </header>
               <div css={css`padding: 0 10px;`}>
+                {series && 
+                  <span>
+                    <Link css={tag_button} to={makeSeriesPath(series)}>
+                      시리즈: {series}
+                    </Link>
+                  </span>
+                }
                 {tags.map((tag, index)=>{
                   return(
                     <span 
@@ -160,7 +165,7 @@ export const Search = ({ props }) => {
                 })}
               </div>
               <section css={css`padding: 0 10px;`}>
-                <p
+                <p css={css`word-break: break-all;`}
                   dangerouslySetInnerHTML={{
                     __html: description || excerpt,
                   }}
@@ -208,7 +213,6 @@ export const postcard = css`
   &:hover{
     transition: transform 0.5s, box-shadow 0.5s;
     transform: translate3d(0px, -5px, 0px);
-    /* box-shadow: ${gray5} 0px 1px 1px, ${gray5} 0px 4px 4px; */
     box-shadow: 0 8px 32px 0 ${gray5};
   }
 `
@@ -226,14 +230,12 @@ export const post_container = css`
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  /* grid-template-rows: masonry; */
   grid-gap: 15px;
 `
 
 export const post_title = css`
   color: inherit;
   text-decoration: none;
-  /* transition: color ease 0.5s; */
   &:hover{
     color: ${nightSky.Cetacean_Blue};
     transition: color ease 0.5s;
@@ -241,6 +243,7 @@ export const post_title = css`
 `
 
 export const tag_button = css`
+  text-decoration: none;
   cursor: pointer;
   font-weight: bold;
   color: ${gray5};

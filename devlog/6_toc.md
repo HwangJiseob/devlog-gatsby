@@ -7,5 +7,9 @@ ToC에 많은 시간을 쏟기가 싫어서 [출처](https://whywhyy.me/blog/202
 
 remark와 mdx에서의 graphql로 toc를 접근하면 다른 반환값을 반환합니다. remark에서는 string으로 반환하지만, mdx에서는 object로 반환합니다. 이 때문에 ToC를 마크업하는 javascript 로직에 차이가 있습니다.
 
+
+##    버그
+테스트를 해보니 heading을 통해서 위치를 이동할 경우, page가 다시 reload되면서 embed가 깜빡거리는 현상이 발생했습니다. 
+
 ##    progressbar
 블로그의 포스트를 읽으면서 스크롤을 내리면, 상단에 상태바가 점점 차는 효과를 구현한 블로그들이 많습니다. 하지만 개인적으로 포스트를 읽는 입장에서 상태바는 약간 거슬렸습니다. 포스트 컨텐츠에 집중할 수 있도록 header도 내리는 중에는 보이지 않도록 처리했는데 상태바는 말할 것도 없죠. 하지만 toc만으로는 얼만큼 읽었는지 알기가 어렵기 때문에, header가 visible할 때만 progressbar도 보이도록 만들 예정입니다.

@@ -52,5 +52,4 @@ export const Utterances: React.FC= React.memo(() => {
     }, [theme]);
 
     return <div ref={containerRef} />;
-    // return <div id="utterances" />;
 })

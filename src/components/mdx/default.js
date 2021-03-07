@@ -12,15 +12,6 @@ import { InlineMath, BlockMath } from 'react-katex';
 import micromark from 'micromark'
 import gfmSyntax from 'micromark-extension-gfm'
 import gfmHtml from 'micromark-extension-gfm/html'
-// import mdxSyntax from 'micromark-extension-mdx'
-// import jsxSyntax from 'micromark-extension-mdx-jsx'
-
-// import unified from 'unified'
-// import remarkParse from 'remark-parse'
-// import remarkStringify from 'remark-stringify'
-
-// import remarkMdx from 'remark-mdx'
-// // import mdxAstToMdxHast from '@mdx-js/mdx/mdx-ast-to-mdx-hast'
 
 const post_width = layout.posts.max_width
 const max_width = layout.main.max_width
@@ -84,6 +75,7 @@ const Prism = ({ children, className }) => {
     color: white;
     padding: 0 1em;
     height: 100%;
+    font: 13px monospace;
     width: auto;
     background: #1e1e1e;
   `
@@ -132,8 +124,9 @@ const Prism = ({ children, className }) => {
   )
 }
 
-const Code = ({ script, language }) => {
-  return <Prism className={language}>{script.trim()}</Prism>
+const Code = ({ script, language, title }) => {
+  const className = `language-${language ? language : ''}` + (title ? `:title=${title}` : '')
+  return <Prism className={className}>{script.trim()}</Prism>
 }
 
 const Youtube = (props) => {
@@ -278,7 +271,7 @@ const InlineCode = styled.code`
   font-size: 12px;
   padding: 0 5px;
   padding-bottom: 2px;
-  margin: 0 4px;
+  margin: 0 2px;
   background: ${nightSky.ChineseViolet};
   color: ${openColor.gray1};
   border-radius: 5px;

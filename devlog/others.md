@@ -13,12 +13,13 @@
 *   post를 읽다가 menu가 있었던 곳에 마우스를 올리면 다시 메뉴가 내려오는 기능 (다시 올라가는 건 미구현)
 
 #   생각하고 있는 기능
-*   code line highlight (내가 안 쓸 것 같아.)
-*   custom 404 (github pages를 사용하면 사실 필요는 없음.)
-*   pagination (아직 포스트가 적어서 필요할 것 같지는 않음.)
-*   Read time (예: Medium의 1 min read) (사실 나는 신경 안 씀)
-*   progress bar (가독성을 해친다고 생각함. 사실 귀찮음.)
+*   social cards (mdx rendering)
+*   code line highlight (제가 안 쓸 것 가탕요.)
+*   custom 404 (github pages를 사용하면 굳이 필요는 없어요.)
+*   pagination (아직 포스트가 나중에 하려고 합니다.)
+*   Read time (예: Medium의 1 min read) (사실 저는 read time 신경 안 씁니다.)
+*   progress bar (이건 가독성을 해친다고 생각합니다.)
 *   glassmorphism
 *   page transition
-*   custom doamin(devlog-gatsby에서는 안 할 예정)
+*   custom doamin(devlog-gatsby에서는 안 할 예정입니다.)
 *   최상단 & 최하단 이동 기능

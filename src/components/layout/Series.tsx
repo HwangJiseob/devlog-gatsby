@@ -10,8 +10,6 @@ import { Tags } from './Post'
 import { makePostPath } from '../../libs/makePath'
 import { SEO } from '../SEO'
 
-// const tests = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
 const Series = ({ pageContext }) => {
   const { posts, fluid, series } = pageContext
   return (
@@ -92,7 +90,6 @@ const post_style = css`
     & > a {
       color: inherit;
       text-decoration: none;
-  /* transition: color ease 0.5s; */
       &:hover{
         color: ${nightSky.ChineseViolet};
         transition: color ease 0.5s;

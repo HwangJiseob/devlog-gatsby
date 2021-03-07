@@ -7,7 +7,6 @@ import { ThemeManagerContext } from 'gatsby-emotion-dark-mode';
 import { Layout } from '../components/layout/Layout'
 import { SEO } from '../components/SEO'
 
-// markup
 const IndexPage = () => {
   let theme = useContext(ThemeManagerContext);
 

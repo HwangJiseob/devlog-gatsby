@@ -148,18 +148,6 @@ export const PostWrapper = styled.div`
   }
 `
 
-// export const PostContainer = styled.div`
-//   width: 100%;
-//   padding: 5px 10px;
-//   max-width: ${post_width};
-//   box-sizing: border-box;
-//   font-family: 'Noto Sans KR', sans-serif;
-
-//   .header-autolink {
-//     display: none;
-//   }
-// `
-
 const PostTitle = styled.div`
   font-family: 'Nanum Myeongjo',  sans-serif;
   font-size: 2.5em;
@@ -179,7 +167,6 @@ const Navigators = styled.div`
 const post_title = css`
   color: inherit;
   text-decoration: none;
-  /* transition: color ease 0.5s; */
   &:hover{
     color: ${nightSky.ChineseViolet};
     transition: color ease 0.5s;
@@ -255,5 +242,3 @@ const navigator = css`
 `
 
 export default Post
-
-// mdx.frontmatter__url

@@ -19,9 +19,10 @@ const defaultKeywords = [
 
 export const SEO = ({ title, description, keywords, image }: props) => {
   const { pathname } = useLocation()
-  // keywords에 대해서는 조금 더 있다가
   return(
-    <Helmet>
+    <Helmet htmlAttributes={{
+      lang: 'ko',
+    }}>
       <title>{title || defaultTitle}</title>
       <meta name="description" content={description || defaultDescription} />
       <meta name="keywords" content={keywords ? keywords.join(',') : defaultKeywords.join(',')}/>
@@ -43,6 +44,14 @@ export const SEO = ({ title, description, keywords, image }: props) => {
       <meta name="twitter:title" content={title || defaultTitle }/>
       <meta name="twitter:description" content={description || defaultDescription} />
       {image && <meta name="twitter:image" content={image}/>}
+
+      {/* disable react devtools */}
+      <script>
+        {`if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
+            console.log(":??")
+            window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
+        }`}
+    </script>
     </Helmet>
   )
 }
